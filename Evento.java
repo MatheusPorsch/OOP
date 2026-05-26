@@ -4,80 +4,94 @@ import java.util.HashMap;
 
 public class Evento {
 
+    //Atributos
     private int codigo;
     private String nome;
     private int progresso;
     private int passoAtual;
     private int passosTotais;
-
     private ArrayList<ExecucaoTarefa> execucoes = new ArrayList<ExecucaoTarefa>();
 
+    //Construtor Vazio
     public Evento() {}
 
+    //Construtor com Parâmetros
     public Evento(int codigo, String nome, int passosTotais) {
+
         this.codigo = codigo;
         this.nome = nome;
         this.passosTotais = passosTotais;
         this.passoAtual = 0;
         this.progresso = 0;
+
     }
 
-   public int getCodigo() {
+    //Getters
+    public int getCodigo() {
 	  	return codigo;
-	}
-	public void setCodigo(int codigo) {
-	  	this.codigo = codigo;
 	}
 	public String getNome() {
 	  	return nome;
 	}
-	public void setNome(String nome) {
-		  this.nome = nome;
-	}
 	public int getProgresso() {
 	  	return progresso;
-	}
-	public void setProgresso(int progresso) {
-	  	this.progresso = progresso;
 	}
 	public int getPassoAtual() {
 		  return passoAtual;
 	}
-	public void setPassoAtual(int passoAtual) {
-		  this.passoAtual = passoAtual;
-	}
 	public int getPassosTotais() {
 		  return passosTotais;
+	}    
+    public ArrayList<ExecucaoTarefa> getExecucao(){
+        return this.execucoes;
+    }
+    
+    //Setters
+	public void setCodigo(int codigo) {
+	  	this.codigo = codigo;
+	}
+	public void setNome(String nome) {
+		  this.nome = nome;
+	}
+	public void setPassoAtual(int passoAtual) {
+		  this.passoAtual = passoAtual;
 	}
 	public void setPassosTotais(int passosTotais) {
 		  this.passosTotais = passosTotais;
 	}
 
-    public void updateCodigoEvento(int codigo) {
+    //Updates
+    public void updateCodigo(int codigo) {
         this.codigo = codigo;
     }
-
-    public void updateEventoNome(String nome) {
+    public void updateNome(String nome) {
         this.nome = nome;
     }
-
-    public void updateEventoPassoAtual(int passoAtual) {
+    public void updatePassoAtual(int passoAtual) {
         this.passoAtual = passoAtual;
         calcularProgresso();
     }
-
-    public void updateEventoPassosTotais(int passosTotais) {
+    public void updatePassosTotais(int passosTotais) {
         this.passosTotais = passosTotais;
         calcularProgresso();
     }
 
+    //Add
+    public void addExecucao(ExecucaoTarefa execucao){
+        this.execucoes.add(execucao);
+    }
+
+    //Remove
+    public void removeExecucao(ExecucaoTarefa execucao){
+        this.execucoes.remove(execucao);;
+    }
+
+    //Método para Executar Tarefa
     public ExecucaoTarefa criarExecucao(Empresa empresa, Tarefa tarefa, Colaborador colaborador, Recurso recurso, int numero, Date inicio, Date fim){
-        
-        ExecucaoTarefa execucaoTarefa = new ExecucaoTarefa();
+
+        //Checar Recursos no Estoque; Retornar 'null' em Caso de Erro
         Estoque estoque = empresa.getEstoque();
-
         HashMap<Recurso, Integer> hm = estoque.getRecurso();
-
         if(hm.containsKey(recurso)){
             if(hm.get(recurso) < numero){
                 return null;
@@ -86,48 +100,32 @@ public class Evento {
             return null;
         }
 
-        EventoTarefa eventotarefa = new EventoTarefa();
-        eventotarefa.setEvento(this);
-        eventotarefa.setTarefa(tarefa);
-        eventotarefa.setPassoAtual(0);
+        //Criar EventoTarefa com Parâmetros
+        EventoTarefa eventotarefa = new EventoTarefa(this, tarefa, 0);
 
-        Quantidade quantidade = new Quantidade(recurso, numero);
-        quantidade.setEventoTarefa(eventotarefa);
+        //Criar Quantidade
+        QuantidadeTarefa quantidade = new QuantidadeTarefa(recurso, numero);
+        quantidade.updateEventoTarefa(eventotarefa);
 
-        execucaoTarefa.setColaborador(colaborador);
-        execucaoTarefa.setQuantidade(quantidade);
+        //Nova ExecucaoTarefa com Parâmetros
+        ExecucaoTarefa execucaoTarefa = new ExecucaoTarefa(0, inicio, fim, colaborador);
+        execucaoTarefa.updateQuantidade(quantidade);
 
+        //Retornar ExecuçãoTarefa
         return execucaoTarefa;
+
     }
 
-    public ArrayList<ExecucaoTarefa> getExecucao(){
-        return this.execucoes;
-    }
-
-    public void addExecucao(ExecucaoTarefa execucao){
-        this.execucoes.add(execucao);
-    }
-
-    public void removeExecucao(ExecucaoTarefa execucao){
-        this.execucoes.remove(execucao);;
-    }
-
+    //Método para Calcular Progresso
     private void calcularProgresso() {
         if (passosTotais > 0) {
-            this.progresso = (passoAtual * 100) / passosTotais;
+            this.progresso = 100 * passoAtual / passosTotais;
         } else {
             this.progresso = 0;
         }
     }
 
-    // public void addExecucao(Evento evento, Tarefa tarefa, Recurso recurso, int q) {
-    //     System.out.println("Execução adicionada:");
-    //     System.out.println("Evento: " + evento.getNome());
-    //     System.out.println("Tarefa: " + tarefa.getNome());
-    //     System.out.println("Recurso: " + recurso.getNome());
-    //     System.out.println("Quantidade: " + q);
-    // }
-
+    //toString
     @Override
     public String toString() {
         return "\ncodigo: " + codigo +

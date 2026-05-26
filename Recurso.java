@@ -1,41 +1,50 @@
 public class Recurso {
+
+    //Atributos
     private int codigo;
     private String nome;
     
+    //Construtor Vazio
     public Recurso() {}
 
+    //Construtor com Parâmetros
     public Recurso(int codigo, String nome) {
+
         this.codigo = codigo;
         this.nome = nome;
+        
     }
 
+    //Getters
     public int getCodigo() {
         return codigo;
     }
-
     public String getNome() {
         return nome;
     }
     
-    public void setCodigo(int codigo) {
+    //Setters
+    private void setCodigo(int codigo) {
         this.codigo = codigo;
     }
-
-    public void setNome(String nome) {
+    private void setNome(String nome) {
         this.nome = nome;
     }
 
-    public void uptadeRecursoCodigo (int codigo) {
+    //Updaters
+    public void updateCodigo (int codigo) {
         setCodigo(codigo);
     }
-
-    public void uptadeRecursoNome (String nome) {
+    public void updateNome (String nome) {
         setNome(nome);
     }
 
+    //toString
     @Override
     public String toString(){
+
         return "Codigo: " + this.codigo + "; Nome: " + this.nome;
+
     }
 
 }
