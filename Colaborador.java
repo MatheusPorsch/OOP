@@ -8,6 +8,7 @@ public class Colaborador {
     public Colaborador() {}
 
     public Colaborador(int codigo, String nome, String funcao, String usuario, String senha) {
+        
         this.codigo = codigo;
         this.nome = nome;
         this.funcao = funcao;
@@ -73,5 +74,10 @@ public class Colaborador {
  
     public void updateColaboradorSenha(String senha) {
         setSenha(senha);
+    }
+
+    @Override
+    public String toString(){
+        return "\nCodigo: " + this.codigo + "; Nome: " + this.nome + "; Função: " + this.funcao + "; Usuário: " + this.usuario + "; Senha: " + this.senha;
     }
 }

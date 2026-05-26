@@ -1,30 +1,36 @@
+import java.util.HashMap;
+
 public class Estoque {
-    private int quantidade;
-    private Recurso recursos[];
+
+    private HashMap<Recurso, Integer> recursos = new HashMap<Recurso, Integer>();
     
     public Estoque() {}
 
-    public Estoque(int quantidade, Recurso[] recursos) {
-        this.quantidade = quantidade;
+    public Estoque(HashMap<Recurso, Integer> recursos) {
         this.recursos = recursos;
     }
 
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public Recurso[] getRecursos() {
+    public HashMap<Recurso, Integer> getRecurso(){
         return recursos;
     }
-    
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+
+    public void adicionarRecurso(Recurso recurso, int quantidade){
+        recursos.put(recurso, quantidade);
     }
 
-    public void setRecursos(Recurso[] recursos) {
-        this.recursos = recursos;
+    public void removerRecurso(Recurso recurso){
+        recursos.remove(recurso);
     }
 
-    
+    @Override
+    public String toString(){
 
+        StringBuilder sb = new StringBuilder();
+
+        recursos.forEach((chave, valor) -> {
+            sb.append(chave + "; Valor: " + valor + ";\n");
+        });
+
+        return sb.toString();
+    }
 }

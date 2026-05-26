@@ -1,14 +1,12 @@
 public class Recurso {
     private int codigo;
     private String nome;
-    private int quantidade;
     
     public Recurso() {}
 
-    public Recurso(int codigo, String nome, int quantidade) {
+    public Recurso(int codigo, String nome) {
         this.codigo = codigo;
         this.nome = nome;
-        this.quantidade = quantidade;
     }
 
     public int getCodigo() {
@@ -19,20 +17,12 @@ public class Recurso {
         return nome;
     }
     
-    public int getQuantidade() {
-        return quantidade;
-    }
-    
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
     }
 
     public void uptadeRecursoCodigo (int codigo) {
@@ -43,7 +33,9 @@ public class Recurso {
         setNome(nome);
     }
 
-    public void uptadeRecursoQuantidade (int quantidade) {
-        setQuantidade(quantidade);
+    @Override
+    public String toString(){
+        return "Codigo: " + this.codigo + "; Nome: " + this.nome;
     }
+
 }
