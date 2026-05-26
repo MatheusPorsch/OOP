@@ -89,31 +89,63 @@ public class Evento {
     //Método para Executar Tarefa
     public ExecucaoTarefa criarExecucao(Empresa empresa, Tarefa tarefa, Colaborador colaborador, Recurso recurso, int numero, Date inicio, Date fim){
 
-        //Checar Recursos no Estoque; Retornar 'null' em Caso de Erro
+        // VALIDAÇÕES
         Estoque estoque = empresa.getEstoque();
         HashMap<Recurso, Integer> hm = estoque.getRecurso();
-        if(hm.containsKey(recurso)){
-            if(hm.get(recurso) < numero){
-                return null;
-            }
-        } else{
+
+        if(!hm.containsKey(recurso)){
+            System.out.println("Erro: Recurso não existe no estoque!");
             return null;
         }
 
-        //Criar EventoTarefa com Parâmetros
-        EventoTarefa eventotarefa = new EventoTarefa(this, tarefa, 0);
+        if(hm.get(recurso) < numero){
+            System.out.println("Erro: Quantidade insuficiente no estoque!");
+            return null;
+        }
 
-        //Criar Quantidade
+        if(colaborador == null){
+            System.out.println("Erro: Execução sem colaborador!");
+            return null;
+        }
+
+        if(inicio == null || fim == null || fim.before(inicio)){
+            System.out.println("Erro: Datas inválidas!");
+            return null;
+        }
+
+        if(this.passoAtual >= this.passosTotais){
+            System.out.println("Erro: Evento já concluído!");
+            return null;
+        }
+
+        // CRIAÇÃO
+
+        int passo = this.passoAtual + 1;
+
+        EventoTarefa eventotarefa = new EventoTarefa(this, tarefa, passo);
+
         QuantidadeTarefa quantidade = new QuantidadeTarefa(recurso, numero);
         quantidade.updateEventoTarefa(eventotarefa);
 
-        //Nova ExecucaoTarefa com Parâmetros
-        ExecucaoTarefa execucaoTarefa = new ExecucaoTarefa(0, inicio, fim, colaborador);
+        int codigoExecucao = this.execucoes.size() + 1;
+
+        ExecucaoTarefa execucaoTarefa = new ExecucaoTarefa(codigoExecucao, inicio, fim, colaborador);
         execucaoTarefa.updateQuantidade(quantidade);
 
-        //Retornar ExecuçãoTarefa
-        return execucaoTarefa;
+        // ATUALIZAÇÕES
 
+        this.execucoes.add(execucaoTarefa); // salva execução
+
+        this.updatePassoAtual(passo); // atualiza progresso
+
+        int quantidadeAtual = hm.get(recurso);
+
+        if (quantidadeAtual == numero) {
+            estoque.removerRecurso(recurso); // remove totalmente
+        } else {
+            hm.put(recurso, quantidadeAtual - numero); // atualiza quantidade
+        } 
+        return execucaoTarefa;
     }
 
     //Método para Calcular Progresso
