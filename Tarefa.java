@@ -4,6 +4,8 @@ public class Tarefa {
     private String nome;
     private String descricao;
     
+    public Tarefa() {}
+
     public Tarefa(int codigo, String nome, String descricao) {
         this.codigo = codigo;
         this.nome = nome;
@@ -36,8 +38,8 @@ public class Tarefa {
 
     @Override
     public String toString() {
-        return "Tarefa [codigo=" + codigo +
-               ", nome=" + nome +
-               ", descricao=" + descricao + "]";
+        return "\ncodigo: " + codigo +
+               "; nome: " + nome +
+               "; descricao: " + descricao;
     }
 }

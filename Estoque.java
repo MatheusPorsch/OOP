@@ -28,7 +28,7 @@ public class Estoque {
         StringBuilder sb = new StringBuilder();
 
         recursos.forEach((chave, valor) -> {
-            sb.append(chave + "; Valor: " + valor + ";\n");
+            sb.append(chave + "; Quantidade: " + valor + ";\n");
         });
 
         return sb.toString();

@@ -6,6 +6,8 @@ public class Empresa {
     private int codigo;
     private String nome;
 
+    private ArrayList<Tarefa> tarefas = new ArrayList<Tarefa>();
+    private ArrayList<Evento> eventos = new ArrayList<Evento>();
     private ArrayList<Colaborador> colaboradores = new ArrayList<Colaborador>();
     private Estoque estoque;
 
@@ -55,8 +57,36 @@ public class Empresa {
         this.colaboradores.remove(colaborador);;
     }
 
+    public ArrayList<Tarefa> getTarefa(){
+        return this.tarefas;
+    }
+
+    public void addTarefa(Tarefa tarefa){
+        this.tarefas.add(tarefa);
+    }
+
+    public void removeTarefa(Tarefa tarefa){
+        this.tarefas.remove(tarefa);;
+    }
+
+    public ArrayList<Evento> getEvento(){
+        return this.eventos;
+    }
+
+    public void addEvento(Evento evento){
+        this.eventos.add(evento);
+    }
+
+    public void removeEvento(Evento evento){
+        this.eventos.remove(evento);;
+    }
+
     public HashMap<Recurso, Integer> getRecurso(){
         return estoque.getRecurso();
+    }
+
+    public Estoque getEstoque(){
+        return this.estoque;
     }
 
     public void addRecurso(Recurso recurso, int quantidade){
@@ -67,10 +97,9 @@ public class Empresa {
         estoque.removerRecurso(recurso);
     }
 
-
     @Override
     public String toString(){
-        return "Objeto Empresa;\nCodigo " + this.codigo + ";\nNome: " + this.nome + ";\nColaboradores: " + this.colaboradores.toString().substring(1, this.colaboradores.toString().length() -1) + ";\nEstoque: \n" + this.estoque;
+        return "Objeto Empresa;\nCodigo " + this.codigo + ";\nNome: " + this.nome + ";\nColaboradores: " + this.colaboradores.toString().substring(1, this.colaboradores.toString().length() -1) + ";\nEventos: " + this.eventos.toString().substring(1, this.eventos.toString().length() -1) + ";\nTarefas: " + this.tarefas.toString().substring(1, this.tarefas.toString().length() -1) +";\nEstoque: \n" + this.estoque;
     }
 
 }

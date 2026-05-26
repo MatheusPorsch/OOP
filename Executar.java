@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Date;
 
 public class Executar {
     
@@ -25,11 +26,36 @@ public class Executar {
         empresa.addColaborador(colaborador1);
         empresa.addColaborador(colaborador2);
 
-        empresa.addRecurso(new Recurso(), 5);
-        empresa.addRecurso(new Recurso(), 10);
+
+        Evento evento1 = new Evento();
+        evento1.setNome("Festa de Aniversário");
+        Evento evento2 = new Evento();
+        evento2.setNome("Almoço");
+        empresa.addEvento(evento1);
+        empresa.addEvento(evento2);
+    
+        Tarefa tarefa1 = new Tarefa();
+        tarefa1.setNome("Varrer");
+        Tarefa tarefa2 = new Tarefa();
+        tarefa2.setNome("Por a mesa");
+        empresa.addTarefa(tarefa1);
+        empresa.addTarefa(tarefa2);
+
+        Recurso recurso1 = new Recurso();
+        recurso1.setNome("Vassoura");
+        Recurso recurso2 = new Recurso();
+        recurso2.setNome("Prato");
+        empresa.addRecurso(recurso1, 2);
+        empresa.addRecurso(recurso2, 10);
+
+        ExecucaoTarefa execucao = evento2.criarExecucao(empresa, tarefa1, colaborador1, recurso2, 100, null, null);
 
         System.out.println("-----------------------------------");
-        System.out.println(empresa);
+        try{
+        System.out.println(execucao.toString().substring(1, execucao.toString().length()-1));
+        } catch (Exception e) {
+            System.out.println("Erro!");
+        }
         System.out.println("-----------------------------------");
         scanner.close();
 
