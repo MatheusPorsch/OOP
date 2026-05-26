@@ -94,7 +94,7 @@ public class Empresa {
     public void removeEvento(Evento evento){
         this.eventos.remove(evento);;
     }    
-    public void removeRecurso(Recurso recurso, int quantidade){
+    public void removeRecurso(Recurso recurso){
         estoque.removerRecurso(recurso);
     }
 

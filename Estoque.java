@@ -30,6 +30,30 @@ public class Estoque {
         recursos.remove(recurso);
     }
 
+    //Aumentar Quantidade No Estoque
+    public void aumentarQuantidadeRecurso(Recurso recurso, int quantidade){
+
+        if(quantidade < 0){
+            System.out.println("Erro: A Quantidade Deve Ser Maior que Zero");
+            return;
+        }
+
+        this.getRecurso().merge(recurso, quantidade, Integer::sum);
+
+    }
+
+    //Diminuir Quantidade No Estoque
+    public void diminuirQuantidadeRecurso(Recurso recurso, int quantidade){
+
+        if(quantidade < 0){
+            System.out.println("Erro: A Quantidade Deve Ser Maior que Zero");
+            return;
+        }
+
+        this.getRecurso().computeIfPresent(recurso, (c, v) -> v - quantidade >= 0 ? v - quantidade : 0);
+
+    }
+
     //toString
     @Override
     public String toString(){
