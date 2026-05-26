@@ -132,13 +132,13 @@ public class Executar {
 
             System.out.println("-----------------------------------");
             
-            try{
-                selecao = scanner.nextInt();
-                scanner.nextLine();
-            } catch (InputMismatchException e){
-                System.out.println("Erro: Você deve Digitar um Número");
-                scanner.nextLine();
-                continue;
+            while(true){
+                try{
+                    selecao = Integer.parseInt(scanner.nextLine());
+                    break;
+                } catch (NumberFormatException e){ 
+                    System.out.println("Erro: Digite Apenas Números Maiores que 0");
+                }
             }
 
             switch (selecao) {
@@ -157,20 +157,31 @@ public class Executar {
 
                     System.out.println("-----------------------------------");
 
-                    try{
-                        selecao = scanner.nextInt();
-                        scanner.nextLine();
-                    } catch (InputMismatchException e){
-                        System.out.println("Erro: Você deve Digitar um Número");
-                        scanner.nextLine();
-                        continue;
+                    while(true){
+                        try{
+                            selecao = Integer.parseInt(scanner.nextLine());
+                            break;
+                        } catch (NumberFormatException e){ 
+                            System.out.println("Erro: Digite Apenas Números Maiores que 0");
+                        }
                     }
 
                     switch (selecao) {
                         case 1: {
                             System.out.println("Código do Colaborador:");
-                            int codigo = scanner.nextInt();
-                            scanner.nextLine();
+                            
+                            int codigo;
+                            
+                            while(true){
+                                try{
+                                    codigo = Integer.parseInt(scanner.nextLine());
+                                    break;
+                                } catch (NumberFormatException e){ 
+                                    System.out.println("Erro: Digite Apenas Números Maiores que 0");
+                                    System.out.println("Código do Colaborador:");
+                                }
+                            }                            
+                            
                             System.out.println("Nome do Colaborador:");
                             String nome = scanner.nextLine();
                             System.out.println("Funcao do Colaborador:");
@@ -186,14 +197,34 @@ public class Executar {
                             break;
                         }
                         case 2: {
+
                             System.out.println("Código do Evento:");
-                            int codigo = scanner.nextInt();
-                            scanner.nextLine();
+                            int codigo;
+                            while(true){
+                                try{
+                                    codigo = Integer.parseInt(scanner.nextLine());
+                                    break;
+                                } catch (NumberFormatException e){ 
+                                    System.out.println("Erro: Digite Apenas Números Maiores que 0");
+                                    System.out.println("Código do Evento:");
+                                }
+                            }
+
                             System.out.println("Nome do Evento:");
                             String nome = scanner.nextLine();
-                            System.out.println("Número de passos totais do Evento:");
-                            int passosTotais = scanner.nextInt();
-                            scanner.nextLine();
+
+                            System.out.println("Número de Passos Totais do Evento:");
+
+                            int passosTotais;
+                            while(true){
+                                try{
+                                    passosTotais = Integer.parseInt(scanner.nextLine());
+                                    break;
+                                } catch (NumberFormatException e){ 
+                                    System.out.println("Erro: Digite Apenas Números Maiores que 0");
+                                    System.out.println("Número de Passos Totais do Evento:");
+                                }
+                            }
 
                             Evento e = new Evento(codigo, nome, passosTotais);
                             empresa.addEvento(e);
@@ -202,8 +233,18 @@ public class Executar {
                         }
                         case 3: {
                             System.out.println("Código da Tarefa:");
-                            int codigo = scanner.nextInt();
-                            scanner.nextLine();
+                            
+                            int codigo;
+                            while(true){
+                                try{
+                                    codigo = Integer.parseInt(scanner.nextLine());
+                                    break;
+                                } catch (NumberFormatException e){ 
+                                    System.out.println("Erro: Digite Apenas Números Maiores que 0");
+                                    System.out.println("Código da Tarefa:");
+                                }
+                            }   
+
                             System.out.println("Nome da Tarefa:");
                             String nome = scanner.nextLine();
                             System.out.println("Descrição da Tarefa:");
@@ -216,13 +257,33 @@ public class Executar {
                         }
                         case 4: {
                             System.out.println("Código do Recurso:");
-                            int codigo = scanner.nextInt();
-                            scanner.nextLine();
+
+                            int codigo;
+                            while(true){
+                                try{
+                                    codigo = Integer.parseInt(scanner.nextLine());
+                                    break;
+                                } catch (NumberFormatException e){ 
+                                    System.out.println("Erro: Digite Apenas Números Maiores que 0");
+                                    System.out.println("Código do Recurso:");
+                                }
+                            } 
+
                             System.out.println("Nome do Recurso:");
                             String nome = scanner.nextLine();
+
                             System.out.println("Quantidade:");
-                            int quantidade = scanner.nextInt();
-                            scanner.nextLine();
+
+                            int quantidade;
+                            while(true){
+                                try{
+                                    quantidade = Integer.parseInt(scanner.nextLine());
+                                    break;
+                                } catch (NumberFormatException e){ 
+                                    System.out.println("Erro: Digite Apenas Números Maiores que 0");
+                                    System.out.println("Quantidade:");
+                                }
+                            } 
 
                             Recurso r = new Recurso(codigo, nome);
                             empresa.addRecurso(r, quantidade);
@@ -251,20 +312,29 @@ public class Executar {
 
                     System.out.println("-----------------------------------");
 
-                    try{
-                        selecao = scanner.nextInt();
-                        scanner.nextLine();
-                    } catch (InputMismatchException e){
-                        System.out.println("Erro: Você deve Digitar um Número");
-                        scanner.nextLine();
-                        continue;
-                    }
+                    while(true){
+                        try{
+                            selecao = Integer.parseInt(scanner.nextLine());
+                            break;
+                        } catch (NumberFormatException e){ 
+                            System.out.println("Erro: Digite Apenas Números Maiores que 0");
+                        }
+                    } 
 
                     switch (selecao) {
                         case 1: {
                             System.out.println("Digite o código do colaborador você deseja alterar: ");
-                            int codigo = scanner.nextInt();
-                            scanner.nextLine();
+
+                            int codigo;
+                            while(true){
+                                try{
+                                    codigo = Integer.parseInt(scanner.nextLine());
+                                    break;
+                                } catch (NumberFormatException e){ 
+                                    System.out.println("Erro: Digite Apenas Números Maiores que 0");
+                                    System.out.println("Digite o código do colaborador você deseja alterar: ");
+                                }
+                            } 
 
                             Colaborador encontrado = null;
                             for (Colaborador c : empresa.getColaborador()) {
@@ -296,8 +366,18 @@ public class Executar {
                         }
                         case 2: {
                             System.out.println("Digite o código do evento você deseja alterar: ");
-                            int codigo = scanner.nextInt();
-                            scanner.nextLine();
+
+                            
+                            int codigo;
+                            while(true){
+                                try{
+                                    codigo = Integer.parseInt(scanner.nextLine());
+                                    break;
+                                } catch (NumberFormatException e){ 
+                                    System.out.println("Erro: Digite Apenas Números Maiores que 0");
+                                    System.out.println("Digite o código do evento você deseja alterar: ");
+                                }
+                            } 
 
                             Evento encontrado = null;
                             for (Evento e : empresa.getEvento()) {
@@ -320,8 +400,17 @@ public class Executar {
                         }
                         case 3: {
                             System.out.println("Digite o código da tarefa você deseja alterar: ");
-                            int codigo = scanner.nextInt();
-                            scanner.nextLine();
+                            
+                            int codigo;
+                            while(true){
+                                try{
+                                    codigo = Integer.parseInt(scanner.nextLine());
+                                    break;
+                                } catch (NumberFormatException e){ 
+                                    System.out.println("Erro: Digite Apenas Números Maiores que 0");
+                                    System.out.println("Digite o código da tarefa você deseja alterar: ");
+                                }
+                            } 
 
                             Tarefa encontrado = null;
                             for (Tarefa t : empresa.getTarefa()) {
@@ -347,8 +436,17 @@ public class Executar {
                         }
                         case 4: {
                             System.out.println("Digite o código do recurso você deseja alterar: ");
-                            int codigo = scanner.nextInt();
-                            scanner.nextLine();
+
+                            int codigo;
+                            while(true){
+                                try{
+                                    codigo = Integer.parseInt(scanner.nextLine());
+                                    break;
+                                } catch (NumberFormatException e){ 
+                                    System.out.println("Erro: Digite Apenas Números Maiores que 0");
+                                    System.out.println("Digite o código do recurso você deseja alterar: ");
+                                }
+                            } 
 
                             Recurso encontrado = null;
                             for (Recurso r : empresa.getRecurso().keySet()) {
@@ -371,8 +469,17 @@ public class Executar {
                         }
                         case 5: {
                             System.out.println("Digite o código da Execução que deseja alterar:");
-                            int codigo = scanner.nextInt();
-                            scanner.nextLine();
+
+                            int codigo;
+                            while(true){
+                                try{
+                                    codigo = Integer.parseInt(scanner.nextLine());
+                                    break;
+                                } catch (NumberFormatException e){ 
+                                    System.out.println("Erro: Digite Apenas Números Maiores que 0");
+                                    System.out.println("Digite o código da Execução que deseja alterar:");
+                                }
+                            } 
 
                             // busca em todos os eventos
                             ExecucaoTarefa encontrada = null;
@@ -390,8 +497,16 @@ public class Executar {
 
                                 // alterar colaborador
                                 System.out.println("Digite o código do novo Colaborador:");
-                                int codigoColab = scanner.nextInt();
-                                scanner.nextLine();
+                                int codigoColab;
+                                while(true){
+                                    try{
+                                        codigoColab = Integer.parseInt(scanner.nextLine());
+                                        break;
+                                    } catch (NumberFormatException e){ 
+                                        System.out.println("Erro: Digite Apenas Números Maiores que 0");
+                                        System.out.println("Digite o código do novo Colaborador:");
+                                    }
+                                } 
 
                                 Colaborador novoColab = null;
                                 for (Colaborador c : empresa.getColaborador()) {
@@ -410,8 +525,17 @@ public class Executar {
 
                                 // alterar quantidade e recurso
                                 System.out.println("Digite o código do novo Recurso:");
-                                int codigoRecurso = scanner.nextInt();
-                                scanner.nextLine();
+                                
+                                int codigoRecurso;
+                                while(true){
+                                    try{
+                                        codigoRecurso = Integer.parseInt(scanner.nextLine());
+                                        break;
+                                    } catch (NumberFormatException e){ 
+                                        System.out.println("Erro: Digite Apenas Números Maiores que 0");
+                                        System.out.println("Digite o código do novo Recurso:");
+                                    }
+                                } 
 
                                 Recurso novoRecurso = null;
                                 for (Recurso r : empresa.getRecurso().keySet()) {
@@ -423,8 +547,17 @@ public class Executar {
 
                                 if (novoRecurso != null) {
                                     System.out.println("Digite a nova quantidade:");
-                                    int novaQuantidade = scanner.nextInt();
-                                    scanner.nextLine();
+
+                                    int novaQuantidade;
+                                    while(true){
+                                        try{
+                                            novaQuantidade = Integer.parseInt(scanner.nextLine());
+                                            break;
+                                        } catch (NumberFormatException e){ 
+                                            System.out.println("Erro: Digite Apenas Números Maiores que 0");
+                                            System.out.println("Digite a nova quantidade:");
+                                        }
+                                    } 
 
                                     encontrada.getQuantidade().updateRecurso(novoRecurso);
                                     encontrada.getQuantidade().updateQuantidade(novaQuantidade);
@@ -460,14 +593,15 @@ public class Executar {
 
                     System.out.println("-----------------------------------");
 
-                    try{
-                        selecao = scanner.nextInt();
-                        scanner.nextLine();
-                    } catch (InputMismatchException e){
-                        System.out.println("Erro: Você deve Digitar um Número");
-                        scanner.nextLine();
-                        continue;
-                    }
+                    
+                    while(true){
+                        try{
+                            selecao = Integer.parseInt(scanner.nextLine());
+                            break;
+                        } catch (NumberFormatException e){ 
+                            System.out.println("Erro: Digite Apenas Números Maiores que 0");
+                        }
+                    } 
 
                     switch (selecao) {
                         case 1:
@@ -557,23 +691,42 @@ public class Executar {
 
                     System.out.println("-----------------------------------");
 
-                    try{
-                        selecao = scanner.nextInt();
-                        scanner.nextLine();
-                    } catch (InputMismatchException e){
-                        System.out.println("Erro: Você deve Digitar um Número");
-                        scanner.nextLine();
-                        continue;
-                    }
+                    while(true){
+                        try{
+                            selecao = Integer.parseInt(scanner.nextLine());
+                            break;
+                        } catch (NumberFormatException e){ 
+                            System.out.println("Erro: Digite Apenas Números Maiores que 0");
+                        }
+                    } 
 
                     switch (selecao) {
                         case 1: {
                             System.out.println("Digite o código do recurso:");
-                            int codigo = scanner.nextInt();
-                            scanner.nextLine();
+
+                            int codigo;
+                            while(true){
+                                try{
+                                    codigo = Integer.parseInt(scanner.nextLine());
+                                    break;
+                                } catch (NumberFormatException e){ 
+                                    System.out.println("Erro: Digite Apenas Números Maiores que 0");
+                                    System.out.println("Digite o código do recurso:");
+                                }
+                            } 
+
                             System.out.println("Digite a quantidade a adicionar:");
-                            int quantidade = scanner.nextInt();
-                            scanner.nextLine();
+
+
+                            int quantidade;
+                            while(true){
+                                try{
+                                    quantidade = Integer.parseInt(scanner.nextLine());
+                                    break;
+                                } catch (NumberFormatException e){ 
+                                    System.out.println("Erro: Digite Apenas Números Maiores que 0");
+                                }
+                            } 
 
                             Recurso encontrado = null;
                             for (Recurso r : empresa.getRecurso().keySet()){
@@ -584,7 +737,7 @@ public class Executar {
                             }
 
                             if(encontrado != null) {
-                                empresa.addRecurso(encontrado, quantidade);
+                                empresa.getEstoque().aumentarQuantidadeRecurso(encontrado, quantidade);
                                 System.out.println("Estoque aumentado!");
                             } else {
                                 System.out.println("Recurso não encontrado!");
@@ -592,12 +745,30 @@ public class Executar {
                             break;
                         }
                         case 2: {
+
                             System.out.println("Digite o código do recurso:");
-                            int codigo = scanner.nextInt();
-                            scanner.nextLine();
-                            System.out.println("Digite a quantidade a adicionar:");
-                            int quantidade = scanner.nextInt();
-                            scanner.nextLine();
+                            int codigo;
+                            while(true){
+                                try{
+                                    codigo = Integer.parseInt(scanner.nextLine());
+                                    break;
+                                } catch (NumberFormatException e){ 
+                                    System.out.println("Erro: Digite Apenas Números Maiores que 0");
+                                    System.out.println("Digite o código do recurso:");
+                                }
+                            } 
+
+                            System.out.println("Digite a quantidade a reduzir:");
+                            int quantidade;
+                            while(true){
+                                try{
+                                    quantidade = Integer.parseInt(scanner.nextLine());
+                                    break;
+                                } catch (NumberFormatException e){ 
+                                    System.out.println("Erro: Digite Apenas Números Maiores que 0");
+                                    System.out.println("Digite a quantidade a reduzir:");
+                                }
+                            } 
 
                             Recurso encontrado = null;
                             for (Recurso r : empresa.getRecurso().keySet()){
@@ -608,7 +779,7 @@ public class Executar {
                             }
 
                             if(encontrado != null) {
-                                empresa.removeRecurso(encontrado, quantidade);
+                                empresa.getEstoque().diminuirQuantidadeRecurso(encontrado, quantidade);
                                 System.out.println("Estoque diminuido!");
                             } else {
                                 System.out.println("Recurso não encontrado!");
@@ -637,20 +808,29 @@ public class Executar {
 
                     System.out.println("-----------------------------------");
 
-                    try{
-                        selecao = scanner.nextInt();
-                        scanner.nextLine();
-                    } catch (InputMismatchException e){
-                        System.out.println("Erro: Você deve Digitar um Número");
-                        scanner.nextLine();
-                        continue;
-                    }
+                    while(true){
+                        try{
+                            selecao = Integer.parseInt(scanner.nextLine());
+                            break;
+                        } catch (NumberFormatException e){ 
+                            System.out.println("Erro: Digite Apenas Números Maiores que 0");
+                        }
+                    } 
 
                     switch (selecao) {
                         case 1: {
+
                             System.out.println("Digite o código do colaborador você deseja alterar: ");
-                            int codigo = scanner.nextInt();
-                            scanner.nextLine();
+                            int codigo;
+                            while(true){
+                                try{
+                                    codigo = Integer.parseInt(scanner.nextLine());
+                                    break;
+                                } catch (NumberFormatException e){ 
+                                    System.out.println("Erro: Digite Apenas Números Maiores que 0");
+                                    System.out.println("Digite o código do colaborador você deseja alterar: ");
+                                }
+                            } 
 
                             Colaborador encontrado = null;
                             for (Colaborador c : empresa.getColaborador()) {
@@ -669,9 +849,18 @@ public class Executar {
                             break;
                         }
                         case 2: {
+
                             System.out.println("Digite o código do evento você deseja alterar: ");
-                            int codigo = scanner.nextInt();
-                            scanner.nextLine();
+                            int codigo;
+                            while(true){
+                                try{
+                                    codigo = Integer.parseInt(scanner.nextLine());
+                                    break;
+                                } catch (NumberFormatException e){ 
+                                    System.out.println("Erro: Digite Apenas Números Maiores que 0");
+                                    System.out.println("Digite o código do evento você deseja alterar: ");
+                                }
+                            } 
 
                             Evento encontrado = null;
                             for (Evento ev : empresa.getEvento()) {
@@ -683,16 +872,25 @@ public class Executar {
 
                             if (encontrado != null) {
                                 empresa.removeEvento(encontrado);
-                                System.out.println("Colaborador excluido!");
+                                System.out.println("Evento excluido!");
                             } else {
-                                System.out.println("Erro: Colaborador não encontrado!");
+                                System.out.println("Erro: Evento não encontrado!");
                             }
                             break;
                         }
                         case 3: {
+
                             System.out.println("Digite o código da tarefa você deseja alterar: ");
-                            int codigo = scanner.nextInt();
-                            scanner.nextLine();
+                            int codigo;
+                            while(true){
+                                try{
+                                    codigo = Integer.parseInt(scanner.nextLine());
+                                    break;
+                                } catch (NumberFormatException e){ 
+                                    System.out.println("Erro: Digite Apenas Números Maiores que 0");
+                                    System.out.println("Digite o código da tarefa você deseja alterar: ");
+                                }
+                            } 
 
                             Tarefa encontrado = null;
                             for (Tarefa t : empresa.getTarefa()) {
@@ -704,16 +902,25 @@ public class Executar {
 
                             if (encontrado != null) {
                                 empresa.removeTarefa(encontrado);
-                                System.out.println("Colaborador excluido!");
+                                System.out.println("Tarefa excluida!");
                             } else {
-                                System.out.println("Erro: Colaborador não encontrado!");
+                                System.out.println("Erro: Tarefa não encontrada!");
                             }
                             break;
                         }
                         case 4: {
                             System.out.println("Digite o código do recurso você deseja alterar: ");
-                            int codigo = scanner.nextInt();
-                            scanner.nextLine();
+
+                            int codigo;
+                            while(true){
+                                try{
+                                    codigo = Integer.parseInt(scanner.nextLine());
+                                    break;
+                                } catch (NumberFormatException e){ 
+                                    System.out.println("Erro: Digite Apenas Números Maiores que 0");
+                                    System.out.println("Digite o código do recurso você deseja alterar: ");
+                                }
+                            } 
 
                             Recurso encontrado = null;
                             for (Recurso r : empresa.getRecurso().keySet()) {
@@ -724,17 +931,26 @@ public class Executar {
                             }
 
                             if (encontrado != null) {
-                                empresa.removeRecurso(encontrado , 0);
-                                System.out.println("Colaborador excluido!");
+                                empresa.removeRecurso(encontrado);
+                                System.out.println("Recurso excluido!");
                             } else {
-                                System.out.println("Erro: Colaborador não encontrado!");
+                                System.out.println("Erro: Recurso não encontrado!");
                             }
                             break;
                         }
                         case 5: {
-                            System.out.println("Digite o código do colaborador você deseja alterar: ");
-                            int codigo = scanner.nextInt();
-                            scanner.nextLine();
+                            System.out.println("Digite o código da execução você deseja alterar: ");
+
+                            int codigo;
+                            while(true){
+                                try{
+                                    codigo = Integer.parseInt(scanner.nextLine());
+                                    break;
+                                } catch (NumberFormatException e){ 
+                                    System.out.println("Erro: Digite Apenas Números Maiores que 0");
+                                    System.out.println("Digite o código da execução você deseja alterar: ");
+                                }
+                            } 
 
                             ExecucaoTarefa encontrado = null;
                             Evento eventoDonoDA = null;
@@ -753,9 +969,9 @@ public class Executar {
 
                             if (encontrado != null) {
                                 eventoDonoDA.removeExecucao(encontrado);
-                                System.out.println("Colaborador excluido!");
+                                System.out.println("Execução excluida!");
                             } else {
-                                System.out.println("Erro: Colaborador não encontrado!");
+                                System.out.println("Erro: Execução não encontrada!");
                             }
                             break;
                         }
@@ -767,128 +983,6 @@ public class Executar {
                     break;
                 }
             }
-/*
-
-
-            System.out.println("1 - Criar Colaborador");
-            System.out.println("2 - Criar Evento");
-            System.out.println("3 - Criar Tarefa");
-            System.out.println("4 - Criar Recurso");
-
-            System.out.println("5 - Execução de Tarefa em Evento");
-
-            
-            System.out.println("4 - Aumentar Quantidade de Recurso");
-            System.out.println("4 - Diminuir Quantidade de Recurso");
-            
-            System.out.println("0 - Alterar Colaborador");
-            System.out.println("4 - Alterar Evento");
-            System.out.println("4 - Alterar Tarefa");
-            System.out.println("4 - Alterar Recurso");
-            System.out.println("4 - Alterar Execução");
-
-            System.out.println("0 - Listar Colaboradores");
-            System.out.println("4 - Listar Eventos");
-            System.out.println("4 - Listar Tarefas");
-            System.out.println("4 - Listar Recursos");
-            System.out.println("4 - Listar Execuções");
-
-            System.out.println("1 - Excluir Colaborador");
-            System.out.println("2 - Excluir Evento");
-            System.out.println("3 - Excluir Tarefa");
-            System.out.println("4 - Excluir Recurso");
-            System.out.println("4 - Excluir Execução");
-
-            System.out.println("-----------------------------------");
-
-            try{
-            selecao = scanner.nextInt();
-            scanner.nextLine();
-            } catch (InputMismatchException e){
-                System.out.println("Erro: Você deve Digitar um Número");
-                scanner.nextLine();
-                continue;
-            }
-
-            switch(selecao){
-                case 0:
-                    listarEmpresas();
-                    break;
-                case 1:
-                    criacaoEmpresa();
-                    break;
-                case 2:
-                    campoInteiro1 = exclusaoEmpresa();
-                    if(campoInteiro1 == 0){
-                        System.out.println("Exclusão Realizada com Sucesso");
-                    } else {
-                        System.out.println("Erro: Empresa Não Localizada");
-                    }
-                    break;
-                case 3:
-                    empresa1 = loginEmpresa();
-                    if(empresa1 != null){
-                        System.out.println("Login Realizado com Sucesso");
-                        efetuarLogin(empresa1);
-                    } else {
-                        System.out.println("Erro: Empresa Não Localizada");
-                    }
-                    break;
-            }
         }
-
-    }
-        // int codigo;
-        // String nome;
-
-        // System.out.println("Digite o nome da Empresa: ");
-        // nome = scanner.next();
-
-        // codigo = 1;
-
-        // Empresa empresa = new Empresa(codigo, nome);
-
-
-        // Colaborador colaborador1 = new Colaborador();
-        // colaborador1.updateNome("Matheus");
-
-        // Colaborador colaborador2 = new Colaborador();
-        // colaborador2.updateNome("Eduardo");
-
-        // empresa.addColaborador(colaborador1);
-        // empresa.addColaborador(colaborador2);
-
-
-        // Evento evento1 = new Evento();
-        // evento1.setNome("Festa de Aniversário");
-        // Evento evento2 = new Evento();
-        // evento2.setNome("Almoço");
-        // empresa.addEvento(evento1);
-        // empresa.addEvento(evento2);
-    
-        // Tarefa tarefa1 = new Tarefa();
-        // tarefa1.updateNome("Varrer");
-        // Tarefa tarefa2 = new Tarefa();
-        // tarefa2.updateNome("Por a mesa");
-        // empresa.addTarefa(tarefa1);
-        // empresa.addTarefa(tarefa2);
-
-        // Recurso recurso1 = new Recurso();
-        // recurso1.updateNome("Vassoura");
-        // Recurso recurso2 = new Recurso();
-        // recurso2.updateNome("Prato");
-        // empresa.addRecurso(recurso1, 2);
-        // empresa.addRecurso(recurso2, 10);
-
-        // ExecucaoTarefa execucao = evento2.criarExecucao(empresa, tarefa1, colaborador1, recurso2, 1, null, null);
-
-        // System.out.println("-----------------------------------");
-        // try{
-        // System.out.println(execucao.toString().substring(1, execucao.toString().length()-1));
-        // } catch (Exception e) {
-        //     System.out.println("Erro!");
-        // }
-        // System.out.println("-----------------------------------");
-
-    
-}
+    }     
+} 
