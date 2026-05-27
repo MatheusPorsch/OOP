@@ -76,12 +76,11 @@ public class ExecucaoTarefa {
     //toString
     @Override
     public String toString() {
-
         return "\nCodigo: " + this.codigo +
-               "\nColaborador: " + this.colaborador.getNome() +
-               ";\nData de Início: " + this.inicio +
-               ";\nData de Fim: " + this.fim + this.quantidade;
-
+            "\nColaborador: " + (this.colaborador != null ? this.colaborador.getNome() : "Sem colaborador") +
+            ";\nData de Início: " + (this.inicio != null ? this.inicio : "Não informada") +
+            ";\nData de Fim: " + (this.fim != null ? this.fim : "Não informada") +
+            (this.quantidade != null ? this.quantidade : "");
     }
 
 }

@@ -1,8 +1,6 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.TreeMap;
-import java.util.InputMismatchException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Executar {
     
@@ -542,133 +540,91 @@ public class Executar {
                     break;
                 }
                 case 4: {
-                	
-                
-                	 System.out.println("-----------------------------------");
-                	    System.out.println("EXECUÇÃO DE TAREFA");
-                	    System.out.println("-----------------------------------");
+                    System.out.println("-----------------------------------");
+                    System.out.println("Executar Tarefa em Evento");
+                    System.out.println("-----------------------------------");
 
-                	    // selecionar evento
-                	    System.out.println("Digite o código do Evento:");
-                	    int codEvento = scanner.nextInt();
-                	    scanner.nextLine();
+                    // declara tudo aqui em cima!
+                    Evento eventoEncontrado = null;
+                    Tarefa tarefaEncontrada = null;
+                    Colaborador colaboradorEncontrado = null;
+                    Recurso recursoEncontrado = null;
+                    int numero = 0;
 
-                	    Evento eventoSelecionado = null;
-                	    for (Evento e : empresa.getEvento()) {
-                	        if (e.getCodigo() == codEvento) {
-                	            eventoSelecionado = e;
-                	            break;
-                	        }
-                	    }
+                    System.out.println("Digite o código do Evento:");
+                    int codigoEvento = scanner.nextInt();
+                    scanner.nextLine();
 
-                	    if (eventoSelecionado == null) {
-                	        System.out.println("Erro: Evento não encontrado!");
-                	        break;
-                	    }
+                    for (Evento ev : empresa.getEvento()) {
+                        if (ev.getCodigo() == codigoEvento) {
+                            eventoEncontrado = ev;
+                            break;
+                        }
+                    }
+                    if (eventoEncontrado == null) { System.out.println("Erro: Evento não encontrado!"); break; }
 
-                	    // selecionar tarefa
-                	    System.out.println("Digite o código da Tarefa:");
-                	    int codTarefa = scanner.nextInt();
-                	    scanner.nextLine();
+                    System.out.println("Digite o código da Tarefa:");
+                    int codigoTarefa = scanner.nextInt();
+                    scanner.nextLine();
 
-                	    Tarefa tarefaSelecionada = null;
-                	    for (Tarefa t : empresa.getTarefa()) {
-                	        if (t.getCodigo() == codTarefa) {
-                	            tarefaSelecionada = t;
-                	            break;
-                	        }
-                	    }
+                    for (Tarefa t : empresa.getTarefa()) {
+                        if (t.getCodigo() == codigoTarefa) {
+                            tarefaEncontrada = t;
+                            break;
+                        }
+                    }
+                    if (tarefaEncontrada == null) { System.out.println("Erro: Tarefa não encontrada!"); break; }
 
-                	    if (tarefaSelecionada == null) {
-                	        System.out.println("Erro: Tarefa não encontrada!");
-                	        break;
-                	    }
+                    System.out.println("Digite o código do Colaborador:");
+                    int codigoColab = scanner.nextInt();
+                    scanner.nextLine();
 
-                	    // selecionar colaborador
-                	    System.out.println("Digite o código do Colaborador:");
-                	    int codColab = scanner.nextInt();
-                	    scanner.nextLine();
+                    for (Colaborador c : empresa.getColaborador()) {
+                        if (c.getCodigo() == codigoColab) {
+                            colaboradorEncontrado = c;
+                            break;
+                        }
+                    }
+                    if (colaboradorEncontrado == null) { System.out.println("Erro: Colaborador não encontrado!"); break; }
 
-                	    Colaborador colaboradorSelecionado = null;
-                	    for (Colaborador c : empresa.getColaborador()) {
-                	        if (c.getCodigo() == codColab) {
-                	            colaboradorSelecionado = c;
-                	            break;
-                	        }
-                	    }
+                    System.out.println("Digite o código do Recurso:");
+                    int codigoRecurso = scanner.nextInt();
+                    scanner.nextLine();
 
-                	    if (colaboradorSelecionado == null) {
-                	        System.out.println("Erro: Colaborador não encontrado!");
-                	        break;
-                	    }
+                    for (Recurso r : empresa.getRecurso().keySet()) {
+                        if (r.getCodigo() == codigoRecurso) {
+                            recursoEncontrado = r;
+                            break;
+                        }
+                    }
+                    if (recursoEncontrado == null) { System.out.println("Erro: Recurso não encontrado!"); break; }
 
-                	    // selecionar recurso
-                	    System.out.println("Digite o código do Recurso:");
-                	    int codRecurso = scanner.nextInt();
-                	    scanner.nextLine();
+                    System.out.println("Digite a quantidade do Recurso:");
+                    numero = scanner.nextInt();
+                    scanner.nextLine();
 
-                	    Recurso recursoSelecionado = null;
-                	    for (Recurso r : empresa.getRecurso().keySet()) {
-                	        if (r.getCodigo() == codRecurso) {
-                	            recursoSelecionado = r;
-                	            break;
-                	        }
-                	    }
+                    try {
+                        ExecucaoTarefa execucao = eventoEncontrado.criarExecucao(
+                            empresa,
+                            tarefaEncontrada,
+                            colaboradorEncontrado,
+                            recursoEncontrado,
+                            numero,
+                            null,
+                            null
+                        );
+                        System.out.println("Execução criada com sucesso!");
+                        System.out.println(execucao);
+                    } catch (QuantidadeInvalidaException e) {
+                        System.out.println(e.getMessage());
+                    } catch (SemResponsavelException e) {
+                        System.out.println(e.getMessage());
+                    } catch (HorarioInvalidoException e) {
+                        System.out.println(e.getMessage());
+                    } catch (OrdemTarefaException e) {
+                        System.out.println(e.getMessage());
+                    }
 
-                	    if (recursoSelecionado == null) {
-                	        System.out.println("Erro: Recurso não encontrado!");
-                	        break;
-                	    }
-
-                	    // quantidade
-                	    System.out.println("Digite a quantidade do recurso:");
-                	    int quantidade = scanner.nextInt();
-                	    scanner.nextLine();
-
-                	    if (quantidade <= 0) {
-                	        System.out.println("Erro: Quantidade inválida!");
-                	        break;
-                	    }
-
-                	    // leitura e conversão de datas
-                	    System.out.println("Digite a data de início (dd/MM/yyyy HH:mm):");
-                	    String inicioStr = scanner.nextLine();
-
-                	    System.out.println("Digite a data de fim (dd/MM/yyyy HH:mm):");
-                	    String fimStr = scanner.nextLine();
-
-                	    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-
-                	    Date inicio = null;
-                	    Date fim = null;
-
-                	    try {
-                	        inicio = sdf.parse(inicioStr);
-                	        fim = sdf.parse(fimStr);
-                	    } catch (Exception e) {
-                	        System.out.println("Erro ao converter datas!");
-                	        break;
-                	    }
-
-                	    // chamada correta do método (agora com Date)
-                	    ExecucaoTarefa execucao = eventoSelecionado.criarExecucao(
-                	        empresa,
-                	        tarefaSelecionada,
-                	        colaboradorSelecionado,
-                	        recursoSelecionado,
-                	        quantidade,
-                	        inicio,
-                	        fim
-                	    );
-
-                	    // valida retorno (estoque / erro)
-                	    if (execucao == null) {
-                	        System.out.println("Erro: Não foi possível criar execução (estoque insuficiente ou dados inválidos)");
-                	    } else {
-                	        System.out.println("Execução registrada com sucesso!");
-                	        System.out.println(execucao);
-                	    }
-                    
                     break;
                 }
 
@@ -723,7 +679,7 @@ public class Executar {
                             System.out.println("Digite o código do recurso:");
                             int codigo = scanner.nextInt();
                             scanner.nextLine();
-                            System.out.println("Digite a quantidade a adicionar:");
+                            System.out.println("Digite a quantidade a remover:");
                             int quantidade = scanner.nextInt();
                             scanner.nextLine();
 
@@ -852,7 +808,7 @@ public class Executar {
                             }
 
                             if (encontrado != null) {
-                                empresa.removeRecurso(encontrado , 0);
+                                empresa.removeRecurso(encontrado, 0);
                                 System.out.println("Colaborador excluido!");
                             } else {
                                 System.out.println("Erro: Colaborador não encontrado!");

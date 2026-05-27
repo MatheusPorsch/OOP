@@ -52,9 +52,9 @@ public class QuantidadeTarefa {
     //toString
     @Override
     public String toString() {
-
-        return "\nRecurso: " + this.recurso + ";\nQuantidade: " + this.quantidade + this.eventoTarefa;
-
+        return "\nRecurso: " + (this.recurso != null ? this.recurso : "Sem recurso") +
+            ";\nQuantidade: " + this.quantidade +
+            (this.eventoTarefa != null ? this.eventoTarefa : "");
     }
 
 }

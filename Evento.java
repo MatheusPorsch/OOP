@@ -87,64 +87,48 @@ public class Evento {
     }
 
     //Método para Executar Tarefa
-    public ExecucaoTarefa criarExecucao(Empresa empresa, Tarefa tarefa, Colaborador colaborador, Recurso recurso, int numero, Date inicio, Date fim){
+    public ExecucaoTarefa criarExecucao(Empresa empresa, Tarefa tarefa, Colaborador colaborador, Recurso recurso, int numero, Date inicio, Date fim) throws QuantidadeInvalidaException, SemResponsavelException, HorarioInvalidoException, OrdemTarefaException {
 
-        // VALIDAÇÕES
         Estoque estoque = empresa.getEstoque();
         HashMap<Recurso, Integer> hm = estoque.getRecurso();
 
-        if(!hm.containsKey(recurso)){
-            System.out.println("Erro: Recurso não existe no estoque!");
-            return null;
+        if (!hm.containsKey(recurso)) {
+            throw new QuantidadeInvalidaException("Erro: Recurso não existe no estoque!");
+        }
+        if (hm.get(recurso) < numero) {
+            throw new QuantidadeInvalidaException("Erro: Quantidade insuficiente no estoque!");
+        }
+        if (colaborador == null) {
+            throw new SemResponsavelException("Erro: Execução sem colaborador!");
+        }
+        if (inicio == null || fim == null || fim.before(inicio)) {
+            throw new HorarioInvalidoException("Erro: Datas inválidas!");
+        }
+        if (this.passoAtual >= this.passosTotais) {
+            throw new OrdemTarefaException("Erro: Evento já concluído, não é possível adicionar mais execuções!");
         }
 
-        if(hm.get(recurso) < numero){
-            System.out.println("Erro: Quantidade insuficiente no estoque!");
-            return null;
-        }
-
-        if(colaborador == null){
-            System.out.println("Erro: Execução sem colaborador!");
-            return null;
-        }
-
-        if(inicio == null || fim == null || fim.before(inicio)){
-            System.out.println("Erro: Datas inválidas!");
-            return null;
-        }
-
-        if(this.passoAtual >= this.passosTotais){
-            System.out.println("Erro: Evento já concluído!");
-            return null;
-        }
-
-        // CRIAÇÃO
-
+        // CRIAÇÃO — igual ao seu
         int passo = this.passoAtual + 1;
-
         EventoTarefa eventotarefa = new EventoTarefa(this, tarefa, passo);
 
         QuantidadeTarefa quantidade = new QuantidadeTarefa(recurso, numero);
         quantidade.updateEventoTarefa(eventotarefa);
 
         int codigoExecucao = this.execucoes.size() + 1;
-
         ExecucaoTarefa execucaoTarefa = new ExecucaoTarefa(codigoExecucao, inicio, fim, colaborador);
         execucaoTarefa.updateQuantidade(quantidade);
 
-        // ATUALIZAÇÕES
-
-        this.execucoes.add(execucaoTarefa); // salva execução
-
-        this.updatePassoAtual(passo); // atualiza progresso
-
+        // ATUALIZAÇÕES — igual ao seu
+        this.execucoes.add(execucaoTarefa);
+        this.updatePassoAtual(passo);
         int quantidadeAtual = hm.get(recurso);
-
         if (quantidadeAtual == numero) {
-            estoque.removerRecurso(recurso); // remove totalmente
+            estoque.removerRecurso(recurso, 0);
         } else {
-            hm.put(recurso, quantidadeAtual - numero); // atualiza quantidade
-        } 
+            hm.put(recurso, quantidadeAtual - numero);
+        }
+
         return execucaoTarefa;
     }
 

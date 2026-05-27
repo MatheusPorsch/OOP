@@ -26,7 +26,7 @@ public class Estoque {
     }
 
     //Remove
-    public void removerRecurso(Recurso recurso){
+    public void removerRecurso(Recurso recurso, int quantidade){
         recursos.remove(recurso);
     }
 
