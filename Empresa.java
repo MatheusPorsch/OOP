@@ -81,7 +81,7 @@ public class Empresa {
         this.eventos.add(evento);
     }
     public void addRecurso(Recurso recurso, int quantidade){
-        estoque.adicionarRecurso(recurso, quantidade);
+        estoque.aumentarQuantidadeRecurso(recurso, quantidade);
     }
 
     //Removes
@@ -95,7 +95,7 @@ public class Empresa {
         this.eventos.remove(evento);;
     }    
     public void removeRecurso(Recurso recurso, int quantidade){
-        estoque.removerRecurso(recurso, quantidade);
+        estoque.diminuirQuantidadeRecurso(recurso, quantidade);
     }
 
     //toString
