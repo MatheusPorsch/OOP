@@ -775,9 +775,9 @@ public class Executar {
 
                             if (encontrado != null) {
                                 empresa.removeEvento(encontrado);
-                                System.out.println("Colaborador excluido!");
+                                System.out.println("Evento excluido!");
                             } else {
-                                System.out.println("Erro: Colaborador não encontrado!");
+                                System.out.println("Erro: Evento não encontrado!");
                             }
                             break;
                         }
@@ -796,9 +796,9 @@ public class Executar {
 
                             if (encontrado != null) {
                                 empresa.removeTarefa(encontrado);
-                                System.out.println("Colaborador excluido!");
+                                System.out.println("Tarefa excluida!");
                             } else {
-                                System.out.println("Erro: Colaborador não encontrado!");
+                                System.out.println("Erro: Tarefa não encontrada!");
                             }
                             break;
                         }
@@ -817,9 +817,9 @@ public class Executar {
 
                             if (encontrado != null) {
                                 empresa.removeRecurso(encontrado, 0);
-                                System.out.println("Colaborador excluido!");
+                                System.out.println("Recurso excluido!");
                             } else {
-                                System.out.println("Erro: Colaborador não encontrado!");
+                                System.out.println("Erro: Recurso não encontrado!");
                             }
                             break;
                         }
@@ -845,9 +845,9 @@ public class Executar {
 
                             if (encontrado != null) {
                                 eventoDonoDA.removeExecucao(encontrado);
-                                System.out.println("Colaborador excluido!");
+                                System.out.println("Codigo excluido!");
                             } else {
-                                System.out.println("Erro: Colaborador não encontrado!");
+                                System.out.println("Erro: Codigo não encontrado!");
                             }
                             break;
                         }
