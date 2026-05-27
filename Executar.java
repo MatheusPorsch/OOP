@@ -24,6 +24,8 @@ public class Executar {
             System.out.println("1 - Criar Empresa");
             System.out.println("2 - Excluir Empresa");
             System.out.println("3 - Entrar em Empresa");
+            System.out.println("9 - Sair");
+
             System.out.println("-----------------------------------");
             try{
             selecao = scanner.nextInt();
@@ -58,6 +60,11 @@ public class Executar {
                         System.out.println("Erro: Empresa Não Localizada");
                     }
                     break;
+                case 9:
+                    System.out.println("Saindo...");
+                    return;
+                default:
+                    System.out.println("Erro: Opção inválida!"); 
             }
         }
     }
@@ -130,6 +137,7 @@ public class Executar {
             System.out.println("4 - Executar");
             System.out.println("5 - Controlar Estoque");
             System.out.println("6 - Excluir");
+            System.out.println("9 - Sair");
 
             System.out.println("-----------------------------------");
             
@@ -847,10 +855,20 @@ public class Executar {
                             continue menuPrincipal;
                         }
                     }
-
                     break;
                 }
+                case 9: {
+                    System.out.println("Saindo...");
+                    break menuPrincipal;
+                }
+                default: {
+                    System.out.println("Erro: Opção inválida!");
+                }
             }
+        }
+    }
+}
+
 /*
 
 
@@ -913,8 +931,6 @@ switch(selecao){
         }
     }
     */
-    
-}
 
 
 // int codigo;
@@ -968,7 +984,3 @@ switch(selecao){
 //     System.out.println("Erro!");
 // }
 // System.out.println("-----------------------------------");
-
-    
-    }     
-} 
