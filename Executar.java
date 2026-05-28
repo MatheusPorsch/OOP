@@ -1,6 +1,9 @@
 import java.util.InputMismatchException;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Executar {
     
@@ -137,6 +140,7 @@ public class Executar {
             System.out.println("4 - Executar");
             System.out.println("5 - Controlar Estoque");
             System.out.println("6 - Excluir");
+            System.out.println("7 - Consulta");
             System.out.println("9 - Sair");
 
             System.out.println("-----------------------------------");
@@ -548,93 +552,137 @@ public class Executar {
                     break;
                 }
                 case 4: {
-                    System.out.println("-----------------------------------");
-                    System.out.println("Executar Tarefa em Evento");
-                    System.out.println("-----------------------------------");
+	               	 System.out.println("-----------------------------------");
+	         	    System.out.println("EXECUÇÃO DE TAREFA");
+	         	    System.out.println("-----------------------------------");
+	
+	         	    // selecionar evento
+	         	    System.out.println("Digite o código do Evento:");
+	         	    int codEvento = scanner.nextInt();
+	         	    scanner.nextLine();
+	
+	         	    Evento eventoSelecionado = null;
+	         	    for (Evento e : empresa.getEvento()) {
+	         	        if (e.getCodigo() == codEvento) {
+	         	            eventoSelecionado = e;
+	         	            break;
+	         	        }
+	         	    }
+	
+	         	    if (eventoSelecionado == null) {
+	         	        System.out.println("Erro: Evento não encontrado!");
+	         	        break;
+	         	    }
+	
+	         	    // selecionar tarefa
+	         	    System.out.println("Digite o código da Tarefa:");
+	         	    int codTarefa = scanner.nextInt();
+	         	    scanner.nextLine();
+	
+	         	    Tarefa tarefaSelecionada = null;
+	         	    for (Tarefa t : empresa.getTarefa()) {
+	         	        if (t.getCodigo() == codTarefa) {
+	         	            tarefaSelecionada = t;
+	         	            break;
+	         	        }
+	         	    }
+	
+	         	    if (tarefaSelecionada == null) {
+	         	        System.out.println("Erro: Tarefa não encontrada!");
+	         	        break;
+	         	    }
+	
+	         	    // selecionar colaborador
+	         	    System.out.println("Digite o código do Colaborador:");
+	         	    int codColab = scanner.nextInt();
+	         	    scanner.nextLine();
+	
+	         	    Colaborador colaboradorSelecionado = null;
+	         	    for (Colaborador c : empresa.getColaborador()) {
+	         	        if (c.getCodigo() == codColab) {
+	         	            colaboradorSelecionado = c;
+	         	            break;
+	         	        }
+	         	    }
+	
+	         	    if (colaboradorSelecionado == null) {
+	         	        System.out.println("Erro: Colaborador não encontrado!");
+	         	        break;
+	         	    }
+	
+	         	    // selecionar recurso
+	         	    System.out.println("Digite o código do Recurso:");
+	         	    int codRecurso = scanner.nextInt();
+	         	    scanner.nextLine();
+	
+	         	    Recurso recursoSelecionado = null;
+	         	    for (Recurso r : empresa.getRecurso().keySet()) {
+	         	        if (r.getCodigo() == codRecurso) {
+	         	            recursoSelecionado = r;
+	         	            break;
+	         	        }
+	         	    }
+	
+	         	    if (recursoSelecionado == null) {
+	         	        System.out.println("Erro: Recurso não encontrado!");
+	         	        break;
+	         	    }
+	
+	         	    // quantidade
+	         	    System.out.println("Digite a quantidade do recurso:");
+	         	    int quantidade = scanner.nextInt();
+	         	    scanner.nextLine();
+	
+	         	    if (quantidade <= 0) {
+	         	        System.out.println("Erro: Quantidade inválida!");
+	         	        break;
+	         	    }
+	
+	         	    // leitura e conversão de datas
+	         	    System.out.println("Digite a data de início (dd/MM/yyyy HH:mm):");
+	         	    String inicioStr = scanner.nextLine();
+	
+	         	    System.out.println("Digite a data de fim (dd/MM/yyyy HH:mm):");
+	         	    String fimStr = scanner.nextLine();
+	
+	         	    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+	
+	         	    Date inicio = null;
+	         	    Date fim = null;
+	
+	         	    try {
+	         	        inicio = sdf.parse(inicioStr);
+	         	        fim = sdf.parse(fimStr);
+	         	    } catch (Exception e) {
+	         	        System.out.println("Erro ao converter datas!");
+	         	        break;
+	         	    }
+	         	    
+	         	   try {
+                       ExecucaoTarefa execucao = eventoSelecionado.criarExecucao(
+                           empresa,
+                           tarefaSelecionada,
+                           colaboradorSelecionado,
+                           recursoSelecionado,
+                           quantidade,
+                           inicio,
+                           fim
+                       );
+                       
+                       System.out.println("Execução criada com sucesso!");
+                       System.out.println(execucao);
+                   } catch (QuantidadeInvalidaException e) {
+                       System.out.println(e.getMessage());
+                   } catch (SemResponsavelException e) {
+                       System.out.println(e.getMessage());
+                   } catch (HorarioInvalidoException e) {
+                       System.out.println(e.getMessage());
+                   } catch (OrdemTarefaException e) {
+                       System.out.println(e.getMessage());
+                   }
 
-                    // declara tudo aqui em cima!
-                    Evento eventoEncontrado = null;
-                    Tarefa tarefaEncontrada = null;
-                    Colaborador colaboradorEncontrado = null;
-                    Recurso recursoEncontrado = null;
-                    int numero = 0;
-
-                    System.out.println("Digite o código do Evento:");
-                    int codigoEvento = scanner.nextInt();
-                    scanner.nextLine();
-
-                    for (Evento ev : empresa.getEvento()) {
-                        if (ev.getCodigo() == codigoEvento) {
-                            eventoEncontrado = ev;
-                            break;
-                        }
-                    }
-                    if (eventoEncontrado == null) { System.out.println("Erro: Evento não encontrado!"); break; }
-
-                    System.out.println("Digite o código da Tarefa:");
-                    int codigoTarefa = scanner.nextInt();
-                    scanner.nextLine();
-
-                    for (Tarefa t : empresa.getTarefa()) {
-                        if (t.getCodigo() == codigoTarefa) {
-                            tarefaEncontrada = t;
-                            break;
-                        }
-                    }
-                    if (tarefaEncontrada == null) { System.out.println("Erro: Tarefa não encontrada!"); break; }
-
-                    System.out.println("Digite o código do Colaborador:");
-                    int codigoColab = scanner.nextInt();
-                    scanner.nextLine();
-
-                    for (Colaborador c : empresa.getColaborador()) {
-                        if (c.getCodigo() == codigoColab) {
-                            colaboradorEncontrado = c;
-                            break;
-                        }
-                    }
-                    if (colaboradorEncontrado == null) { System.out.println("Erro: Colaborador não encontrado!"); break; }
-
-                    System.out.println("Digite o código do Recurso:");
-                    int codigoRecurso = scanner.nextInt();
-                    scanner.nextLine();
-
-                    for (Recurso r : empresa.getRecurso().keySet()) {
-                        if (r.getCodigo() == codigoRecurso) {
-                            recursoEncontrado = r;
-                            break;
-                        }
-                    }
-                    if (recursoEncontrado == null) { System.out.println("Erro: Recurso não encontrado!"); break; }
-
-                    System.out.println("Digite a quantidade do Recurso:");
-                    numero = scanner.nextInt();
-                    scanner.nextLine();
-
-                    try {
-                        ExecucaoTarefa execucao = eventoEncontrado.criarExecucao(
-                            empresa,
-                            tarefaEncontrada,
-                            colaboradorEncontrado,
-                            recursoEncontrado,
-                            numero,
-                            null,
-                            null
-                        );
-                        System.out.println("Execução criada com sucesso!");
-                        System.out.println(execucao);
-                    } catch (QuantidadeInvalidaException e) {
-                        System.out.println(e.getMessage());
-                    } catch (SemResponsavelException e) {
-                        System.out.println(e.getMessage());
-                    } catch (HorarioInvalidoException e) {
-                        System.out.println(e.getMessage());
-                    } catch (OrdemTarefaException e) {
-                        System.out.println(e.getMessage());
-                    }
-
-                    break;
-                }
+                   break;
+               }
 
                 case 5: {
                     System.out.println("-----------------------------------");
@@ -856,6 +904,197 @@ public class Executar {
                         }
                     }
                     break;
+                }
+                case 7:{
+                	System.out.println("-----------------------------------");
+
+                    System.out.println("Selecione o que você deseja consultar:");
+
+                    System.out.println("-----------------------------------");
+
+                    System.out.println("1 - Consultar Colaboradores");
+                    System.out.println("2 - Consultar Eventos");
+                    System.out.println("3 - Consultar Tarefas");
+                    System.out.println("4 - Consultar Recursos");
+                    System.out.println("5 - Consultar Execuções");
+                    System.out.println("6 - Voltar");
+
+                    System.out.println("-----------------------------------");
+
+                    try{
+                        selecao = scanner.nextInt();
+                        scanner.nextLine();
+                    } catch (InputMismatchException e){
+                        System.out.println("Erro: Você deve Digitar um Número");
+                        scanner.nextLine();
+                        continue;
+                    }
+
+                    String pesquisaString;
+                    int pesquisaCodigo;
+                    
+                    switch (selecao) {
+                        case 1:
+                        	
+                            boolean temColaborador = false;
+                            
+                            System.out.println("Digite o código ou o nome do colaborador: ");
+                            pesquisaString = scanner.nextLine();
+                            
+                            for (Colaborador c : empresa.getColaborador()) {
+       
+                            	if(c.getNome().equals(pesquisaString)) {
+                            		System.out.println(c);
+                            		temColaborador = true;
+                            		break;
+                            	}
+                                
+                            	try{
+                            		pesquisaCodigo = Integer.parseInt(pesquisaString);
+                                	if(c.getCodigo() == pesquisaCodigo) {
+                                		System.out.println(c);
+                                		temColaborador = true;
+                                	}
+                  
+                            	} catch (NumberFormatException e){
+                            		System.out.println("Não há colaboradores com esse parâmetro! ");
+                            		temColaborador = true;
+                            	}       
+                            }
+                            
+                            if (!temColaborador) {
+                                System.out.println("Não há colaboradores com esse parâmetro! ");
+                            }
+                            
+                            break;
+                            
+                        case 2:
+                        	
+                     
+                            boolean temEvento = false;
+                            
+                            System.out.println("Digite o código ou o nome do evento: ");
+                            pesquisaString = scanner.nextLine();
+                            
+                            for (Evento c : empresa.getEvento()) {
+       
+                            	if(c.getNome().equals(pesquisaString)) {
+                            		System.out.println(c);
+                            		temEvento = true;
+                            		break;
+                            	}
+                                
+                            	try{
+                            		pesquisaCodigo = Integer.parseInt(pesquisaString);
+                                	if(c.getCodigo() == pesquisaCodigo) {
+                                		System.out.println(c);
+                                		temEvento = true;
+                                	}
+                  
+                            	} catch (NumberFormatException e){
+                            		System.out.println("Não há eventos com esse parâmetro! ");
+                            		temEvento = true;
+                            	}       
+                            }
+                            
+                            if (!temEvento) {
+                                System.out.println("Não há eventos com esse parâmetro! ");
+                            }
+                            
+                            break;
+                        case 3:
+                        	
+                        	
+                            boolean temTarefa = false;
+                            
+                            System.out.println("Digite o código ou o nome da tarefa: ");
+                            
+                            pesquisaString = scanner.nextLine();
+                            
+                            for (Tarefa c : empresa.getTarefa()) {
+       
+                            	if(c.getNome().equals(pesquisaString)) {
+                            		System.out.println(c);
+                            		temTarefa = true;
+                            		break;
+                            	}
+                                
+                            	try{
+                            		pesquisaCodigo = Integer.parseInt(pesquisaString);
+                                	if(c.getCodigo() == pesquisaCodigo) {
+                                		System.out.println(c);
+                                		temTarefa = true;
+                                	}
+                  
+                            	} catch (NumberFormatException e){
+                            		System.out.println("Não há tarefas com esse parâmetro! ");
+                            		temTarefa = true;
+                            	}       
+                            }
+                            
+                            if (!temTarefa) {
+                                System.out.println("Não há tarefas com esse parâmetro! ");
+                            }                            
+
+                            
+                            break;
+                        case 4:
+                        	
+                            boolean temRecurso = false;
+
+                            System.out.println("Digite o código ou o nome do recurso: ");
+                            
+                            pesquisaString = scanner.nextLine();
+                            
+                            for (Map.Entry<Recurso, Integer> c : empresa.getEstoque().getRecurso().entrySet()) {
+       
+                            	if(c.getKey().getNome().equals(pesquisaString)) {
+                            		System.out.println("Codigo: " + c.getKey().getCodigo() + "; Nome: " + c.getKey().getNome() + "; Quantidade: " + c.getValue() + ".");
+                            		temRecurso = true;
+                            		break;
+                            	}
+                                
+                            	try{
+                            		pesquisaCodigo = Integer.parseInt(pesquisaString);
+                                	if(c.getKey().getCodigo() == pesquisaCodigo) {
+                                		System.out.println("Codigo: " + c.getKey().getCodigo() + "; Nome: " + c.getKey().getNome() + "; Quantidade: " + c.getValue() + ".");
+                                		temRecurso = true;
+                                		break;
+                                	}
+                  
+                            	} catch (NumberFormatException e){
+                            		System.out.println("Não há recursos com esse parâmetro! ");
+                            		temRecurso = true;
+                            	}       
+                            }
+                            
+                            if (!temRecurso) {
+                                System.out.println("Não há recursos com esse parâmetro! ");
+                            }  
+                            
+                            break;
+                        case 5: 
+                            boolean temExecucao = false;
+                            
+                            for (Evento ev : empresa.getEvento()) {
+                                for (ExecucaoTarefa ex : ev.getExecucao()) {
+                                    System.out.println("Evento: " + ev.getNome());
+                                    System.out.println(ex);
+                                    temExecucao = true;
+                                }
+                            }
+                            
+                            if (!temExecucao) {
+                                System.out.println("Não há execuções cadastradas!");
+                            }
+                            break;
+                        case 6: 
+                            continue menuPrincipal;
+                    }
+                    break;
+                
+                	
+                	
                 }
                 case 9: {
                     System.out.println("Saindo...");
