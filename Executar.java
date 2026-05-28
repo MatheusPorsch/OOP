@@ -557,13 +557,12 @@ public class Executar {
 	         	    System.out.println("-----------------------------------");
 	
 	         	    // selecionar evento
-	         	    System.out.println("Digite o código do Evento:");
-	         	    int codEvento = scanner.nextInt();
-	         	    scanner.nextLine();
+	         	    System.out.println("Digite o nome do Evento:");
+	         	    String codEvento = scanner.nextLine();
 	
 	         	    Evento eventoSelecionado = null;
 	         	    for (Evento e : empresa.getEvento()) {
-	         	        if (e.getCodigo() == codEvento) {
+	         	        if (e.getNome().equals(codEvento)) {
 	         	            eventoSelecionado = e;
 	         	            break;
 	         	        }
@@ -575,13 +574,12 @@ public class Executar {
 	         	    }
 	
 	         	    // selecionar tarefa
-	         	    System.out.println("Digite o código da Tarefa:");
-	         	    int codTarefa = scanner.nextInt();
-	         	    scanner.nextLine();
+	         	    System.out.println("Digite o nome da Tarefa:");
+	         	    String codTarefa = scanner.nextLine();
 	
 	         	    Tarefa tarefaSelecionada = null;
 	         	    for (Tarefa t : empresa.getTarefa()) {
-	         	        if (t.getCodigo() == codTarefa) {
+	         	        if (t.getNome().equals(codTarefa)) {
 	         	            tarefaSelecionada = t;
 	         	            break;
 	         	        }
@@ -593,13 +591,12 @@ public class Executar {
 	         	    }
 	
 	         	    // selecionar colaborador
-	         	    System.out.println("Digite o código do Colaborador:");
-	         	    int codColab = scanner.nextInt();
-	         	    scanner.nextLine();
+	         	    System.out.println("Digite o nome do Colaborador:");
+	         	    String codColab = scanner.nextLine();
 	
 	         	    Colaborador colaboradorSelecionado = null;
 	         	    for (Colaborador c : empresa.getColaborador()) {
-	         	        if (c.getCodigo() == codColab) {
+	         	        if (c.getNome().equals(codColab)) {
 	         	            colaboradorSelecionado = c;
 	         	            break;
 	         	        }
@@ -611,13 +608,12 @@ public class Executar {
 	         	    }
 	
 	         	    // selecionar recurso
-	         	    System.out.println("Digite o código do Recurso:");
-	         	    int codRecurso = scanner.nextInt();
-	         	    scanner.nextLine();
+	         	    System.out.println("Digite o nome do Recurso:");
+	         	    String codRecurso = scanner.nextLine();
 	
 	         	    Recurso recursoSelecionado = null;
 	         	    for (Recurso r : empresa.getRecurso().keySet()) {
-	         	        if (r.getCodigo() == codRecurso) {
+	         	        if (r.getNome().equals(codRecurso)) {
 	         	            recursoSelecionado = r;
 	         	            break;
 	         	        }
@@ -788,13 +784,13 @@ public class Executar {
 
                     switch (selecao) {
                         case 1: {
-                            System.out.println("Digite o código do colaborador você deseja alterar: ");
-                            int codigo = scanner.nextInt();
-                            scanner.nextLine();
+                        	
+                            System.out.println("Digite o nome do colaborador você deseja excluir: ");
+                            String nome = scanner.nextLine();
 
                             Colaborador encontrado = null;
                             for (Colaborador c : empresa.getColaborador()) {
-                                if (c.getCodigo() == codigo) {
+                                if (c.getNome().equals(nome)) {
                                     encontrado = c;
                                     break;
                                 }
@@ -809,13 +805,13 @@ public class Executar {
                             break;
                         }
                         case 2: {
-                            System.out.println("Digite o código do evento você deseja alterar: ");
-                            int codigo = scanner.nextInt();
-                            scanner.nextLine();
+                            System.out.println("Digite o nome do evento você deseja excluir: ");
+                            
+                            String nome = scanner.nextLine();
 
                             Evento encontrado = null;
                             for (Evento ev : empresa.getEvento()) {
-                                if (ev.getCodigo() == codigo) {
+                                if (ev.getNome().equals(nome)) {
                                     encontrado = ev;
                                     break;
                                 }
@@ -830,13 +826,13 @@ public class Executar {
                             break;
                         }
                         case 3: {
-                            System.out.println("Digite o código da tarefa você deseja alterar: ");
-                            int codigo = scanner.nextInt();
-                            scanner.nextLine();
+                            System.out.println("Digite o nome da tarefa você deseja excluir: ");
+                            
+                            String nome = scanner.nextLine();
 
                             Tarefa encontrado = null;
                             for (Tarefa t : empresa.getTarefa()) {
-                                if (t.getCodigo() == codigo) {
+                                if (t.getNome().equals(nome)) {
                                     encontrado = t;
                                     break;
                                 }
@@ -851,14 +847,14 @@ public class Executar {
                             break;
                         }
                         case 4: {
-                            System.out.println("Digite o código do recurso você deseja alterar: ");
-                            int codigo = scanner.nextInt();
-                            scanner.nextLine();
+                        	
+                            System.out.println("Digite o nome do recurso você deseja excluir: ");
+                            String nome = scanner.nextLine();
 
                             Recurso encontrado = null;
-                            for (Recurso r : empresa.getRecurso().keySet()) {
-                                if (r.getCodigo() == codigo) {
-                                    encontrado = r;
+                            for (Map.Entry<Recurso, Integer> r : empresa.getEstoque().getRecurso().entrySet()) {
+                                if (r.getKey().getNome().equals(nome)) {
+                                    encontrado = r.getKey();
                                     break;
                                 }
                             }
@@ -872,7 +868,7 @@ public class Executar {
                             break;
                         }
                         case 5: {
-                            System.out.println("Digite o código do colaborador você deseja alterar: ");
+                            System.out.println("Digite o nome da execução que você deseja excluir: ");
                             int codigo = scanner.nextInt();
                             scanner.nextLine();
 
@@ -943,23 +939,29 @@ public class Executar {
                             
                             for (Colaborador c : empresa.getColaborador()) {
        
-                            	if(c.getNome().equals(pesquisaString)) {
+                            	if(c.getNome().contains(pesquisaString)) {
                             		System.out.println(c);
                             		temColaborador = true;
-                            		break;
                             	}
                                 
-                            	try{
-                            		pesquisaCodigo = Integer.parseInt(pesquisaString);
-                                	if(c.getCodigo() == pesquisaCodigo) {
-                                		System.out.println(c);
-                                		temColaborador = true;
-                                	}
-                  
-                            	} catch (NumberFormatException e){
-                            		System.out.println("Não há colaboradores com esse parâmetro! ");
-                            		temColaborador = true;
-                            	}       
+                            }
+                            
+                            if(!temColaborador) {
+                            	
+                            	for (Colaborador c : empresa.getColaborador()) {
+	                            	try{
+	                            		pesquisaCodigo = Integer.parseInt(pesquisaString);
+	                                	if(c.getCodigo() == pesquisaCodigo) {
+	                                		System.out.println(c);
+	                                		temColaborador = true;
+	                                	}
+	                  
+	                            	} catch (NumberFormatException e){
+	                            		System.out.println("Não há colaboradores com esse parâmetro! ");
+	                            		temColaborador = true;
+	                            		break;
+	                            	}
+                            	}
                             }
                             
                             if (!temColaborador) {
@@ -978,10 +980,9 @@ public class Executar {
                             
                             for (Evento c : empresa.getEvento()) {
        
-                            	if(c.getNome().equals(pesquisaString)) {
+                            	if(c.getNome().contains(pesquisaString)) {
                             		System.out.println(c);
                             		temEvento = true;
-                            		break;
                             	}
                                 
                             	try{
@@ -994,6 +995,7 @@ public class Executar {
                             	} catch (NumberFormatException e){
                             		System.out.println("Não há eventos com esse parâmetro! ");
                             		temEvento = true;
+                            		break;
                             	}       
                             }
                             
@@ -1013,10 +1015,9 @@ public class Executar {
                             
                             for (Tarefa c : empresa.getTarefa()) {
        
-                            	if(c.getNome().equals(pesquisaString)) {
+                            	if(c.getNome().contains(pesquisaString)) {
                             		System.out.println(c);
                             		temTarefa = true;
-                            		break;
                             	}
                                 
                             	try{
@@ -1029,6 +1030,7 @@ public class Executar {
                             	} catch (NumberFormatException e){
                             		System.out.println("Não há tarefas com esse parâmetro! ");
                             		temTarefa = true;
+                            		break;
                             	}       
                             }
                             
@@ -1048,10 +1050,9 @@ public class Executar {
                             
                             for (Map.Entry<Recurso, Integer> c : empresa.getEstoque().getRecurso().entrySet()) {
        
-                            	if(c.getKey().getNome().equals(pesquisaString)) {
+                            	if(c.getKey().getNome().contains(pesquisaString)) {
                             		System.out.println("Codigo: " + c.getKey().getCodigo() + "; Nome: " + c.getKey().getNome() + "; Quantidade: " + c.getValue() + ".");
                             		temRecurso = true;
-                            		break;
                             	}
                                 
                             	try{
@@ -1059,12 +1060,12 @@ public class Executar {
                                 	if(c.getKey().getCodigo() == pesquisaCodigo) {
                                 		System.out.println("Codigo: " + c.getKey().getCodigo() + "; Nome: " + c.getKey().getNome() + "; Quantidade: " + c.getValue() + ".");
                                 		temRecurso = true;
-                                		break;
                                 	}
                   
                             	} catch (NumberFormatException e){
                             		System.out.println("Não há recursos com esse parâmetro! ");
                             		temRecurso = true;
+                            		break;
                             	}       
                             }
                             
@@ -1076,18 +1077,33 @@ public class Executar {
                         case 5: 
                             boolean temExecucao = false;
                             
+                            System.out.println("Digite o código da execução: ");
+
+                            
+                            String getExecucao = scanner.nextLine();
+                            
                             for (Evento ev : empresa.getEvento()) {
                                 for (ExecucaoTarefa ex : ev.getExecucao()) {
-                                    System.out.println("Evento: " + ev.getNome());
-                                    System.out.println(ex);
-                                    temExecucao = true;
+                                	try{
+                                		pesquisaCodigo = Integer.parseInt(getExecucao);
+                                    	if(ex.getCodigo() == pesquisaCodigo) {
+                                    		System.out.println(ex);
+                                    		temExecucao = true;
+                                    	}
+                      
+                                	} catch (NumberFormatException e){
+                                		System.out.println("Não há execuções com esse parâmetro! ");
+                                		temTarefa = true;
+                                		break;
+                                	}   
                                 }
                             }
                             
                             if (!temExecucao) {
-                                System.out.println("Não há execuções cadastradas!");
+                                System.out.println("Não há execuções com esse parâmetro! !");
                             }
                             break;
+                            
                         case 6: 
                             continue menuPrincipal;
                     }
@@ -1107,119 +1123,3 @@ public class Executar {
         }
     }
 }
-
-/*
-
-
-System.out.println("1 - Criar Colaborador");
-System.out.println("2 - Criar Evento");
-System.out.println("3 - Criar Tarefa");
-System.out.println("4 - Criar Recurso");
-
-System.out.println("5 - Execução de Tarefa em Evento");
-
-
-System.out.println("4 - Aumentar Quantidade de Recurso");
-System.out.println("4 - Diminuir Quantidade de Recurso");
-
-System.out.println("0 - Alterar Colaborador");
-System.out.println("4 - Alterar Evento");
-System.out.println("4 - Alterar Tarefa");
-System.out.println("4 - Alterar Recurso");
-System.out.println("4 - Alterar Execução");
-
-System.out.println("0 - Listar Colaboradores");
-System.out.println("4 - Listar Eventos");
-System.out.println("4 - Listar Tarefas");
-System.out.println("4 - Listar Recursos");
-System.out.println("4 - Listar Execuções");
-
-System.out.println("1 - Excluir Colaborador");
-System.out.println("2 - Excluir Evento");
-System.out.println("3 - Excluir Tarefa");
-System.out.println("4 - Excluir Recurso");
-System.out.println("4 - Excluir Execução");
-
-System.out.println("-----------------------------------");
-
-
-switch(selecao){
-    case 0:
-        listarEmpresas();
-        break;
-        case 1:
-            criacaoEmpresa();
-            break;
-            case 2:
-                campoInteiro1 = exclusaoEmpresa();
-                if(campoInteiro1 == 0){
-                    System.out.println("Exclusão Realizada com Sucesso");
-                } else {
-                    System.out.println("Erro: Empresa Não Localizada");
-            }
-            break;
-            case 3:
-                empresa1 = loginEmpresa();
-                if(empresa1 != null){
-                    System.out.println("Login Realizado com Sucesso");
-                    efetuarLogin(empresa1);
-                } else {
-                    System.out.println("Erro: Empresa Não Localizada");
-            }
-            break;
-        }
-    }
-    */
-
-
-// int codigo;
-// String nome;
-
-// System.out.println("Digite o nome da Empresa: ");
-// nome = scanner.next();
-
-// codigo = 1;
-
-// Empresa empresa = new Empresa(codigo, nome);
-
-
-// Colaborador colaborador1 = new Colaborador();
-// colaborador1.updateNome("Matheus");
-
-// Colaborador colaborador2 = new Colaborador();
-// colaborador2.updateNome("Eduardo");
-
-// empresa.addColaborador(colaborador1);
-// empresa.addColaborador(colaborador2);
-
-
-// Evento evento1 = new Evento();
-// evento1.setNome("Festa de Aniversário");
-// Evento evento2 = new Evento();
-// evento2.setNome("Almoço");
-// empresa.addEvento(evento1);
-// empresa.addEvento(evento2);
-
-// Tarefa tarefa1 = new Tarefa();
-// tarefa1.updateNome("Varrer");
-// Tarefa tarefa2 = new Tarefa();
-// tarefa2.updateNome("Por a mesa");
-// empresa.addTarefa(tarefa1);
-// empresa.addTarefa(tarefa2);
-
-// Recurso recurso1 = new Recurso();
-// recurso1.updateNome("Vassoura");
-// Recurso recurso2 = new Recurso();
-// recurso2.updateNome("Prato");
-// empresa.addRecurso(recurso1, 2);
-// empresa.addRecurso(recurso2, 10);
-
-// ExecucaoTarefa execucao = evento2.criarExecucao(empresa, tarefa1, colaborador1, recurso2, 1, null, null);
-
-// System.out.println("-----------------------------------");
-// try{
-// System.out.println(execucao.toString().substring(1, execucao.toString().length()-1));
-// } catch (Exception e) {
-//     System.out.println("Erro!");
-// }
-// System.out.println("-----------------------------------");
