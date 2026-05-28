@@ -928,6 +928,7 @@ public class Executar {
 
                     String pesquisaString;
                     int pesquisaCodigo;
+                    boolean conversao = false;
                     
                     switch (selecao) {
                         case 1:
@@ -978,6 +979,14 @@ public class Executar {
                             System.out.println("Digite o código ou o nome do evento: ");
                             pesquisaString = scanner.nextLine();
                             
+                            conversao = false;
+                            
+                        	try{
+                        		pesquisaCodigo = Integer.parseInt(pesquisaString);
+                        		conversao = true;
+                        	} catch (NumberFormatException e){} 
+                        	
+                        	
                             for (Evento c : empresa.getEvento()) {
        
                             	if(c.getNome().contains(pesquisaString)) {
@@ -985,18 +994,10 @@ public class Executar {
                             		temEvento = true;
                             	}
                                 
-                            	try{
-                            		pesquisaCodigo = Integer.parseInt(pesquisaString);
-                                	if(c.getCodigo() == pesquisaCodigo) {
-                                		System.out.println(c);
-                                		temEvento = true;
-                                	}
-                  
-                            	} catch (NumberFormatException e){
-                            		System.out.println("Não há eventos com esse parâmetro! ");
-                            		temEvento = true;
-                            		break;
-                            	}       
+                                if(conversao && c.getCodigo() == Integer.parseInt(pesquisaString)) {
+                                	System.out.println(c);
+                                	temEvento = true;
+                                }  
                             }
                             
                             if (!temEvento) {
@@ -1013,6 +1014,14 @@ public class Executar {
                             
                             pesquisaString = scanner.nextLine();
                             
+                            conversao = false;
+                            
+                        	try{
+                        		pesquisaCodigo = Integer.parseInt(pesquisaString);
+                        		conversao = true;
+                        	} catch (NumberFormatException e){} 
+                        	
+                        	
                             for (Tarefa c : empresa.getTarefa()) {
        
                             	if(c.getNome().contains(pesquisaString)) {
@@ -1020,18 +1029,10 @@ public class Executar {
                             		temTarefa = true;
                             	}
                                 
-                            	try{
-                            		pesquisaCodigo = Integer.parseInt(pesquisaString);
-                                	if(c.getCodigo() == pesquisaCodigo) {
-                                		System.out.println(c);
-                                		temTarefa = true;
-                                	}
-                  
-                            	} catch (NumberFormatException e){
-                            		System.out.println("Não há tarefas com esse parâmetro! ");
-                            		temTarefa = true;
-                            		break;
-                            	}       
+                                if(conversao && c.getCodigo() == Integer.parseInt(pesquisaString)) {
+                                	System.out.println(c);
+                                	temTarefa = true;
+                                }  
                             }
                             
                             if (!temTarefa) {
@@ -1093,7 +1094,7 @@ public class Executar {
                       
                                 	} catch (NumberFormatException e){
                                 		System.out.println("Não há execuções com esse parâmetro! ");
-                                		temTarefa = true;
+                                		temExecucao = true;
                                 		break;
                                 	}   
                                 }
