@@ -76,7 +76,7 @@ public class Colaborador {
     @Override
     public String toString(){
 
-        return "\nCodigo: " + this.codigo + "; Nome: " + this.nome + "; Função: " + this.funcao + "; Usuário: " + this.usuario + "; Senha: " + this.senha;
+        return "- Codigo: " + this.codigo + "; Nome: " + this.nome + "; Função: " + this.funcao + "; Usuário: " + this.usuario + "; Senha: " + this.senha;
     
     }
 

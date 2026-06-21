@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class Empresa {
@@ -73,6 +74,7 @@ public class Empresa {
     //Adds
     public void addColaborador(Colaborador colaborador){
         this.colaboradores.add(colaborador);
+        this.colaboradores.sort(Comparator.comparing(Colaborador::getCodigo).thenComparing(Colaborador::getNome));
     }
     public void addTarefa(Tarefa tarefa){
         this.tarefas.add(tarefa);

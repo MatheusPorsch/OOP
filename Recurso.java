@@ -42,9 +42,7 @@ public class Recurso {
     //toString
     @Override
     public String toString(){
-
         return "Codigo: " + this.codigo + "; Nome: " + this.nome;
-
     }
 
 }
