@@ -124,7 +124,7 @@ public class Evento {
         this.updatePassoAtual(passo);
         int quantidadeAtual = hm.get(recurso);
         if (quantidadeAtual == numero) {
-            estoque.removerRecurso(recurso, 0);
+            estoque.removerRecurso(recurso);
         } else {
             hm.put(recurso, quantidadeAtual - numero);
         }
@@ -144,7 +144,7 @@ public class Evento {
     //toString
     @Override
     public String toString() {
-        return "\ncodigo: " + codigo +
+        return "Codigo: " + codigo +
                "; nome: " + nome +
                "; progresso: " + progresso + "%" +
                "; passoAtual: " + passoAtual +

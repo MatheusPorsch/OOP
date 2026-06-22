@@ -52,7 +52,7 @@ public class Tarefa {
     @Override
     public String toString() {
 
-        return "\ncodigo: " + codigo + "; nome: " + nome + "; descricao: " + descricao;
+        return "Codigo: " + codigo + "; nome: " + nome + "; descricao: " + descricao;
 
     }
 
