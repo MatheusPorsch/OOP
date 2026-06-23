@@ -88,7 +88,7 @@ public class Evento {
 
     //Método para Executar Tarefa
     public ExecucaoTarefa criarExecucao(Empresa empresa, Tarefa tarefa, Colaborador colaborador, Recurso recurso, int numero, Date inicio, Date fim) throws QuantidadeInvalidaException, SemResponsavelException, HorarioInvalidoException, OrdemTarefaException {
-
+    	
         Estoque estoque = empresa.getEstoque();
         HashMap<Recurso, Integer> hm = estoque.getRecurso();
 
@@ -108,7 +108,6 @@ public class Evento {
             throw new OrdemTarefaException("Erro: Evento já concluído, não é possível adicionar mais execuções!");
         }
 
-        // CRIAÇÃO — igual ao seu
         int passo = this.passoAtual + 1;
         EventoTarefa eventotarefa = new EventoTarefa(this, tarefa, passo);
 
@@ -118,8 +117,8 @@ public class Evento {
         int codigoExecucao = this.execucoes.size() + 1;
         ExecucaoTarefa execucaoTarefa = new ExecucaoTarefa(codigoExecucao, inicio, fim, colaborador);
         execucaoTarefa.updateQuantidade(quantidade);
+        execucaoTarefa.setEvento(this);
 
-        // ATUALIZAÇÕES — igual ao seu
         this.execucoes.add(execucaoTarefa);
         this.updatePassoAtual(passo);
         int quantidadeAtual = hm.get(recurso);
