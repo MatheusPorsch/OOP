@@ -1,5 +1,7 @@
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class ExecucaoTarefa {
     
     //Atributos
@@ -8,6 +10,8 @@ public class ExecucaoTarefa {
     Date fim;
     QuantidadeTarefa quantidade;
     Colaborador colaborador;
+    @JsonIgnore
+    private Evento evento;
 
     //Construtor Vazio
     public ExecucaoTarefa() {};
