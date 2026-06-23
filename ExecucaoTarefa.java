@@ -26,7 +26,8 @@ public class ExecucaoTarefa {
         
     }
 
-    //Getters
+	
+	//Getters
     public int getCodigo(){
         return this.codigo;
     }
@@ -42,6 +43,9 @@ public class ExecucaoTarefa {
     public Colaborador getColaborador(){
         return this.colaborador;
     }
+    public Evento getEvento() {
+		return evento;
+	}
 
     //Setters
     private void setCodigo(int codigo){
@@ -59,6 +63,10 @@ public class ExecucaoTarefa {
     private void setColaborador(Colaborador colaborador){
         this.colaborador = colaborador;
     }
+    public void setEvento(Evento evento) {
+		this.evento = evento;
+	}
+
 
     //Updaters
     public void updateCodigo(int codigo){
