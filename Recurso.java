@@ -1,29 +1,29 @@
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 public class Recurso {
 
-    //Atributos
+    // Atributos
     private int codigo;
     private String nome;
-    
-    //Construtor Vazio
+
+    // Construtor Vazio
     public Recurso() {}
 
-    //Construtor com Parâmetros
+    // Construtor com Parâmetros
     public Recurso(int codigo, String nome) {
-
         this.codigo = codigo;
         this.nome = nome;
-        
     }
 
-    //Getters
+    // Getters
     public int getCodigo() {
         return codigo;
     }
     public String getNome() {
         return nome;
     }
-    
-    //Setters
+
+    // Setters
     private void setCodigo(int codigo) {
         this.codigo = codigo;
     }
@@ -31,18 +31,40 @@ public class Recurso {
         this.nome = nome;
     }
 
-    //Updaters
-    public void updateCodigo (int codigo) {
+    // Updaters
+    public void updateCodigo(int codigo) {
         setCodigo(codigo);
     }
-    public void updateNome (String nome) {
+    public void updateNome(String nome) {
         setNome(nome);
     }
 
-    //toString
     @Override
-    public String toString(){
-        return "Codigo: " + this.codigo + "; Nome: " + this.nome;
+    public int hashCode() {
+        return codigo;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Recurso other = (Recurso) obj;
+        return codigo == other.codigo;
+    }
+
+    // ---- Suporte ao Jackson para usar Recurso como CHAVE de Map ----
+
+    @JsonCreator
+    public static Recurso fromString(String chave) {
+        // formato esperado: "codigo:nome"
+        String[] partes = chave.split(":", 2);
+        int codigo = Integer.parseInt(partes[0]);
+        String nome = partes.length > 1 ? partes[1] : "";
+        return new Recurso(codigo, nome);
+    }
+
+    @Override
+    public String toString() {
+        return this.codigo + ":" + this.nome;
+    }
 }
