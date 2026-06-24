@@ -1,7 +1,11 @@
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class QuantidadeTarefa {
 
     //Atributos
+	@JsonIgnore
     EventoTarefa eventoTarefa;
+	
     Recurso recurso;
     int quantidade;
 
