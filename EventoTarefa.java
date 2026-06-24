@@ -1,7 +1,10 @@
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class EventoTarefa {
 	
 	//Atributos
+	
+	@JsonIgnore
 	private Evento evento;
 	private Tarefa tarefa;
 	private int passoAtual;
