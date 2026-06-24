@@ -1,0 +1,86 @@
+{
+    "codigo": 0,
+    "nome": "ucs",
+    "estoque": {
+        "recurso": {
+            "1:panela": 6,
+            "2:Carro": 1,
+            "3:Prato": 10
+        }
+    },
+    "tarefa": [
+        {
+            "codigo": 1,
+            "nome": "Dirigir",
+            "descricao": "Levar pessoas para o jantar"
+        },
+        {
+            "codigo": 2,
+            "nome": "Cozinhar",
+            "descricao": "Cozinhar o jantar"
+        },
+        {
+            "codigo": 3,
+            "nome": "Servir",
+            "descricao": "servir o jantar"
+        }
+    ],
+    "evento": [
+        {
+            "codigo": 1,
+            "nome": "Jantar",
+            "progresso": 20,
+            "passoAtual": 1,
+            "passosTotais": 5,
+            "execucao": [
+                {
+                    "codigo": 1,
+                    "inicio": 1782338400000,
+                    "fim": 1782424800000,
+                    "quantidade": {
+                        "recurso": {
+                            "codigo": 2,
+                            "nome": "Carro"
+                        },
+                        "quantidade": 1
+                    },
+                    "colaborador": {
+                        "codigo": 2,
+                        "nome": "Eduardo",
+                        "funcao": "Motorista",
+                        "usuario": "eduardo",
+                        "senha": "123"
+                    }
+                }
+            ]
+        }
+    ],
+    "recurso": {
+        "1:panela": 6,
+        "2:Carro": 1,
+        "3:Prato": 10
+    },
+    "colaborador": [
+        {
+            "codigo": 1,
+            "nome": "Bruno",
+            "funcao": "Garçom",
+            "usuario": "bruno",
+            "senha": "123"
+        },
+        {
+            "codigo": 2,
+            "nome": "Eduardo",
+            "funcao": "Motorista",
+            "usuario": "eduardo",
+            "senha": "123"
+        },
+        {
+            "codigo": 3,
+            "nome": "Matheus",
+            "funcao": "Cozinheiro",
+            "usuario": "matheus",
+            "senha": "123"
+        }
+    ]
+}
