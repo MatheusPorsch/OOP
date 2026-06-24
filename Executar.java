@@ -297,8 +297,14 @@ public class Executar {
                         System.out.println(busca_colaborador);
                     else
                         System.out.println("Erro: Não há colaboradores com esse parâmetro!");
-                    
-
+                }
+                case 6 -> {
+                    Persistencia.salvarEmpresa(empresa);
+                    break;
+                }
+                case 7 -> {
+                    Persistencia.carregarEmpresa(empresa.getNome());
+                    break;
                 }
                 case 9 -> {
                 
